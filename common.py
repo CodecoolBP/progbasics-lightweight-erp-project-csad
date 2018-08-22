@@ -3,6 +3,7 @@ implement commonly used functions here
 """
 
 import random
+import ui
 
 
 def generate_random(table):
@@ -21,8 +22,16 @@ def generate_random(table):
     string_letters = 'abcdefghijklmnopqrstuvwxyz'
     random_letter = random.choice(string_letters)
     random_upper_letter = random.choice(string_letters).upper()
-    random_number = random.randint(1, 10)
-    generated = random_letter+random_upper_letter+str(random_number)+str(random_number)+random_upper_letter+random_letter+'#&'
+    generated = random_letter+random_upper_letter+str(random.randint(1, 10))+str(random.randint(1, 10))+random_upper_letter+random_letter+'#&'
     # your code
 
     return generated
+
+
+def add_function_common(table, list_labels, title):
+    list_to_add = []
+    list_to_add.append(generate_random(table))
+    inputs = ui.get_inputs(list_labels, title)
+    list_to_add.extend(inputs)
+    table.append(list_to_add)
+    return table

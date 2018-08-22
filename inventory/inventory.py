@@ -97,11 +97,9 @@ def add(table):
     """
 
     # your code
-    list_to_add = []
-    list_to_add.append(common.generate_random(table))
-    inputs = ui.get_inputs(['name', 'manufacturer', 'purchase year', 'durability'], "Please enter name, manufacturer, purchase year and durability")
-    list_to_add.extend(inputs)
-    table.append(list_to_add)
+    list_labels = ['name', 'manufacturer', 'purchase year', 'durability']
+    title = "Please enter name, manufacturer, purchase year and durability"
+    table = common.add_function_common(table, list_labels, title)
     return table
 
 
@@ -143,7 +141,7 @@ def update(table, id_):
         if id_[0] == table[element][0]:
             id_index = element
     
-    options = ['name', 'manufacturer', 'purchase year', 'durability']
+    options = ['Name', 'Manufacturer', 'Purchase year', 'Durability']
 
 
     def choose():
