@@ -23,6 +23,10 @@ def print_table(table, title_list):
     """
 
     # your goes code
+    print(title_list)
+    for line in table:
+        print(line)
+    print()
 
 
 def print_result(result, label):
@@ -92,7 +96,7 @@ def get_inputs(list_labels, title):
 
     # your code
     for i in range(len(list_labels)):
-        inputs.append(input(list_labels))
+        inputs.append(input('Please enter '+list_labels[i]+'\n\t'))
 
     return inputs
 
