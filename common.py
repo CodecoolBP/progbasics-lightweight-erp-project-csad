@@ -35,3 +35,10 @@ def add_function_common(table, list_labels, title):
     list_to_add.extend(inputs)
     table.append(list_to_add)
     return table
+
+
+def remove_function_common(table, id_):
+    for element in range(len(table)):
+        if id_[0] == table[element][0]:
+            del table[element]
+    return table

@@ -116,9 +116,7 @@ def remove(table, id_):
     """
 
     # your code
-    for element in range(len(table)):
-        if id_[0] == table[element][0]:
-            del table[element]
+    table = common.remove_function_common(table, id_)
 
     return table
 
@@ -136,7 +134,6 @@ def update(table, id_):
     """
 
     # your code
-    print('Function missing')
     for element in range(len(table)):
         if id_[0] == table[element][0]:
             id_index = element
