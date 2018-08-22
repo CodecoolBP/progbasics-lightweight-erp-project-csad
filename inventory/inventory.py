@@ -29,6 +29,7 @@ def start_module():
     """
 
     # your code
+    table = data_manager.get_table_from_file('inventory/inventory.csv')
     options = ["Show table",
                "Add",
                "Remove",
@@ -70,7 +71,8 @@ def show_table(table):
     """
 
     # your code
-    print('Function missing')
+    ui.print_table(table)
+
 
 def add(table):
     """
