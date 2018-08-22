@@ -48,8 +48,10 @@ def start_module():
             elif option == "2":
                 add(table)
             elif option == "3":
+                id_ = ui.get_inputs(['id'], "Please enter ID")
                 remove(table, id_)
             elif option == "4":
+                id_ = ui.get_inputs(['id'], "Please enter ID")
                 update(table, id_)
             elif option == "5":
                 get_counts_by_manufacturers(table)
@@ -72,7 +74,7 @@ def show_table(table):
         None
     """
     
-    print_table(store_table, ["id", "Title of the Game", "Manufacturer", "Price in dollars", "In Stock"])
+
 
     # your code
     title_list = ['id', 'title', 'manufacturer', 'price', 'in stock']
@@ -94,7 +96,7 @@ def add(table):
     title = "Please enter title, manufacturer, price and the amount in stock"
     table = common.add_function_common(table, list_labels, title)
     return table
-    return table
+
 
 
 def remove(table, id_):
@@ -110,6 +112,8 @@ def remove(table, id_):
     """
 
     # your code
+
+    table = common.remove_function_common(table, id_)
 
     return table
 
