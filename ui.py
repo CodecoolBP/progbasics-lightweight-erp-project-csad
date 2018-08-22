@@ -1,4 +1,5 @@
 """ User Interface (UI) module """
+from data_manager import *
 
 
 def print_table(table, title_list):
@@ -21,7 +22,25 @@ def print_table(table, title_list):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
+    list_of_str_table = []
 
+    for i in range(len(table)):
+        for j in range(len(table[i])):
+            list_of_str_table.append(str(table[i][j]))
+    
+    max_length = max(list_of_str_table)
+
+    for header in title_list:
+        print("|", header.center(max_length, " "), "|")
+        print("|", "-" * max_length, "|")
+    for i in range(len(table)):
+        for j in range(len(table[i])):
+            print("|", j.center(max_length, " "), "|")
+            print("|", "-" * max_length, "|")
+            
+    
+   
+        
     # your goes code
 
 
