@@ -71,7 +71,8 @@ def show_table(table):
     """
 
     # your code
-    ui.print_table(table)
+    title_list = ['id', 'name', 'manufacturer', 'purchase year', 'durability']
+    ui.print_table(table, title_list)
 
 
 def add(table):
