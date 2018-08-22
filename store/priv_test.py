@@ -52,33 +52,33 @@ def print_table(table, title_list):
     for line in table:
         print("|", "  |  ".join(line), "|")'''
     
-    columns = len(title_list)
-
-    while columns <= 0:
-    
-        max_length = int(len(table[0][1]))
-
-        column_counter = 0
-
-        for i in range(len(title_list)):
-            column_counter = 0
-            for i in range(len(table)):
-                for j in range(len(table[i])):    
-                    if len(table[i][column_counter]) > max_length:
-                        max_length = len(table[i][column_counter])
-                        column_counter += 1
-
     
     
+    max_length_list = []
+
+    for x in range(len(title_list)):
+        max_length = 0
+        for i in range(len(table)):
+            for j in range(len(table[i])):
+                if len(table[i][x]) > max_length:
+                    max_length = len(table[i][x])
+
+        if max_length < len(title_list[x]):
+            max_length = len(title_list[x])
+        
+        max_length_list.append(max_length)
     
+    print("\n")
+    print("|", "|".join(item.center(max_length_list[i] + 2, " ") for i, item in enumerate(title_list)), "|")
+    print((sum(max_length_list) + 2 * len(max_length_list) + len(max_length_list) + 2) * "-")
+    for i in range(len(table)):
+        print("|", "|".join(item.center(max_length_list[j] + 2, " ") for j, item in enumerate(table[i])), "|")
+        print((sum(max_length_list) + 2 * len(max_length_list) + len(max_length_list) + 2) * "-")
 
-   
-                
-
+      
     
             
-    
-    
+            
 
 
 store_table = get_table_from_file("store/games.csv")
