@@ -70,7 +70,7 @@ def show_table(table):
         None
     """
     
-    print_table(store_table, ["id", "Title of the Game", "Manufacturer", "Price in dollars", "In Stock"])
+    
 
     # your code
     ui.print_table(table)
