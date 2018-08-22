@@ -29,7 +29,34 @@ def start_module():
     """
 
     # your code
+    options = ["Show table",
+               "Add",
+               "Remove",
+               "Update",
+               "Get available items",
+               "Get average durability by manufacturers"]
 
+    ui.print_menu("Inventory", options, "Back to main menu")
+    def choose():
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = inputs[0]
+        if option == "1":
+            show_table(table)
+        elif option == "2":
+            add(table)
+        elif option == "3":
+            remove(table, id_)
+        elif option == "4":
+            update(table, id_)
+        elif option == "5":
+            get_available_items(table)
+        elif option == "6":
+            get_average_durability_by_manufacturers(table)
+        elif option == "0":
+            pass
+        else:
+            raise KeyError("There is no such option.")
+    choose()
 
 def show_table(table):
     """
@@ -43,7 +70,7 @@ def show_table(table):
     """
 
     # your code
-
+    print('Function missing')
 
 def add(table):
     """
@@ -57,8 +84,8 @@ def add(table):
     """
 
     # your code
-
-    return table
+    print('Function missing')
+    #return table
 
 
 def remove(table, id_):
@@ -74,8 +101,8 @@ def remove(table, id_):
     """
 
     # your code
-
-    return table
+    print('Function missing')
+    #return table
 
 
 def update(table, id_):
@@ -91,8 +118,8 @@ def update(table, id_):
     """
 
     # your code
-
-    return table
+    print('Function missing')
+    #return table
 
 
 # special functions:
