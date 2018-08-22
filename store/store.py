@@ -27,7 +27,7 @@ def start_module():
     Returns:
         None
     """
-
+    
     # your code
     table = data_manager.get_table_from_file('store/games.csv')
     options = ["Show table",
@@ -71,6 +71,8 @@ def show_table(table):
     Returns:
         None
     """
+    
+    print_table(store_table, ["id", "Title of the Game", "Manufacturer", "Price in dollars", "In Stock"])
 
     # your code
     title_list = ['id', 'title', 'manufacturer', 'price', 'in stock']
@@ -159,3 +161,5 @@ def get_average_by_manufacturer(table, manufacturer):
     """
 
     # your code
+
+
