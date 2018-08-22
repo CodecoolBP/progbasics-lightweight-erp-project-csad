@@ -56,6 +56,7 @@ def start_module():
                 id_ = ui.get_inputs(['id'], "Please enter ID")
                 remove(table, id_)
             elif option == "4":
+                id_ = ui.get_inputs(['id'], "Please enter ID")
                 update(table, id_)
             elif option == "5":
                 get_available_items(table)
@@ -117,8 +118,9 @@ def remove(table, id_):
     """
 
     # your code
-    if id_ in table[id_][0]:
-        del table[id_]
+    for element in range(len(table)):
+        if id_[0] == table[element][0]:
+            del table[element]
 
     return table
 
@@ -137,7 +139,32 @@ def update(table, id_):
 
     # your code
     print('Function missing')
-    #return table
+    for element in range(len(table)):
+        if id_[0] == table[element][0]:
+            id_index = element
+    
+    options = ['name', 'manufacturer', 'purchase year', 'durability']
+
+
+    def choose():
+        while True:
+            ui.print_menu("Inventory item update", options, "Back to Inventory menu")
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            if option == "1":
+                table[id_index][1] = ui.get_inputs(["Please enter a name: "], "")[0]
+            elif option == "2":
+                table[id_index][2] = ui.get_inputs(["Please enter the manufacturer: "], "")[0]
+            elif option == "3":
+                table[id_index][3] = ui.get_inputs(["Please enter purchase year: "], "")[0]
+            elif option == "4":
+                table[id_index][4] = ui.get_inputs(["Please enter durability: "], "")[0]
+            elif option == "0":
+                break
+            else:
+                raise KeyError("There is no such option.")
+    choose()
+    return table
 
 
 # special functions:

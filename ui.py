@@ -84,7 +84,7 @@ def print_menu(title, list_options, exit_message):
     """
 
     # your code
-    print(title+':')
+    print('\n'+title+':')
     for i in range(len(list_options)):
         print('\t('+str(i+1)+') '+str(list_options[i]))   
     print('\t(0) '+exit_message+'\n')
