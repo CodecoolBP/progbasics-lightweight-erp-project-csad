@@ -29,7 +29,12 @@ def start_module():
     """
 
     # your code
-    table = data_manager.get_table_from_file('inventory/inventory.csv')
+
+    try:
+        if table is False:
+            pass
+    except UnboundLocalError:
+        table = data_manager.get_table_from_file('inventory/inventory.csv')
     options = ["Show table",
                "Add",
                "Remove",
@@ -37,26 +42,30 @@ def start_module():
                "Get available items",
                "Get average durability by manufacturers"]
 
-    ui.print_menu("Inventory", options, "Back to main menu")
+    
     def choose():
-        inputs = ui.get_inputs(["Please enter a number: "], "")
-        option = inputs[0]
-        if option == "1":
-            show_table(table)
-        elif option == "2":
-            add(table)
-        elif option == "3":
-            remove(table, id_)
-        elif option == "4":
-            update(table, id_)
-        elif option == "5":
-            get_available_items(table)
-        elif option == "6":
-            get_average_durability_by_manufacturers(table)
-        elif option == "0":
-            pass
-        else:
-            raise KeyError("There is no such option.")
+        while True:
+            ui.print_menu("Inventory", options, "Back to main menu")
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            if option == "1":
+                show_table(table)
+            elif option == "2":
+                add(table)
+            elif option == "3":
+                id_ = ui.get_inputs(['id'], "Please enter ID")
+                remove(table, id_)
+            elif option == "4":
+                update(table, id_)
+            elif option == "5":
+                get_available_items(table)
+            elif option == "6":
+                get_average_durability_by_manufacturers(table)
+            elif option == "0":
+                break
+            else:
+                raise KeyError("There is no such option.")
+
     choose()
 
 def show_table(table):
@@ -71,7 +80,8 @@ def show_table(table):
     """
 
     # your code
-    ui.print_table(table)
+    title_list = ['id', 'name', 'manufacturer', 'purchase year', 'durability']
+    ui.print_table(table, title_list)
 
 
 def add(table):
@@ -86,8 +96,12 @@ def add(table):
     """
 
     # your code
-    print('Function missing')
-    #return table
+    list_to_add = []
+    list_to_add.append(common.generate_random(table))
+    inputs = ui.get_inputs(['name', 'manufacturer', 'purchase year', 'durability'], "Please enter name, manufacturer, purchase year and durability")
+    list_to_add.extend(inputs)
+    table.append(list_to_add)
+    return table
 
 
 def remove(table, id_):
@@ -103,8 +117,10 @@ def remove(table, id_):
     """
 
     # your code
-    print('Function missing')
-    #return table
+    if id_ in table[id_][0]:
+        del table[id_]
+
+    return table
 
 
 def update(table, id_):

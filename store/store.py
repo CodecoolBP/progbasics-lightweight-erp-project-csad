@@ -27,7 +27,7 @@ def start_module():
     Returns:
         None
     """
-    print_menu()
+    
     # your code
     table = data_manager.get_table_from_file('store/games.csv')
     options = ["Show table",
@@ -74,7 +74,7 @@ def show_table(table):
 
     # your code
     ui.print_table(table)
-
+    
 
 def add(table):
     """
