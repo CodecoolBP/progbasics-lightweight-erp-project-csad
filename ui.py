@@ -81,6 +81,10 @@ def print_menu(title, list_options, exit_message):
     """
 
     # your code
+    print(title+':')
+    for i in range(len(list_options)):
+        print('\t('+str(i+1)+') '+str(list_options[i]))   
+    print('\t(0) '+exit_message+'\n')
 
 
 def get_inputs(list_labels, title):
@@ -102,9 +106,12 @@ def get_inputs(list_labels, title):
         list: List of data given by the user. Sample return:
             [<user_input_1>, <user_input_2>, <user_input_3>]
     """
+    
     inputs = []
 
     # your code
+    for i in range(len(list_labels)):
+        inputs.append(input(list_labels))
 
     return inputs
 
@@ -121,3 +128,4 @@ def print_error_message(message):
     """
 
     # your code
+    print(message)
