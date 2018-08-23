@@ -59,7 +59,9 @@ def start_module():
                 id_ = ui.get_inputs(['id'], "Please enter ID")
                 update(table, id_)
             elif option == "5":
-                get_lowest_price_item_id(table)
+                result_id = get_lowest_price_item_id(table)
+                label_id = "\"lowest price item id\""
+                ui.print_result(result_id, label_id)
             elif option == "6":
                 get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
             elif option == "0":
@@ -178,8 +180,18 @@ def get_lowest_price_item_id(table):
     Returns:
          string: id
     """
-
     # your code
+    lowest_price = int(table[0][2])
+    item_id = table[0][0]
+    for i in range(len(table)):
+        for j in range(len(table[i])):
+            if int(table[i][2]) < lowest_price:
+                lowest_price = int(table[i][2])
+                item_id = table[i][0]
+
+    return str(item_id)
+            
+   
 
 
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
