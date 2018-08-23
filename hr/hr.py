@@ -27,7 +27,44 @@ def start_module():
     """
 
     # your code
+    try:
+        if table is False:
+            pass
+    except UnboundLocalError:
+        table = data_manager.get_table_from_file('hr/persons.csv')
+    options = ["Show table",
+               "Add",
+               "Remove",
+               "Update",
+               "Get oldest person",
+               "Get persons closest to average"]
 
+    
+    def choose():
+        while True:
+            ui.print_menu("HR", options, "Back to main menu")
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            if option == "1":
+                show_table(table)
+            elif option == "2":
+                add(table)
+            elif option == "3":
+                id_ = ui.get_inputs(['id'], "Please enter ID")
+                remove(table, id_)
+            elif option == "4":
+                id_ = ui.get_inputs(['id'], "Please enter ID")
+                update(table, id_)
+            elif option == "5":
+                get_oldest_person(table)
+            elif option == "6":
+                get_persons_closest_to_average(table)
+            elif option == "0":
+                break
+            else:
+                raise KeyError("There is no such option.")
+
+    choose()
 
 def show_table(table):
     """
@@ -41,7 +78,8 @@ def show_table(table):
     """
 
     # your code
-
+    title_list = ['id', 'name', 'birth year']
+    ui.print_table(table, title_list)
 
 def add(table):
     """
@@ -55,7 +93,9 @@ def add(table):
     """
 
     # your code
-
+    list_labels = ['name', 'birth year']
+    title = "Please enter name and birth year"
+    table = common.add_function_common(table, list_labels, title)
     return table
 
 
@@ -72,7 +112,7 @@ def remove(table, id_):
     """
 
     # your code
-
+    table = common.remove_function_common(table, id_)
     return table
 
 
@@ -89,7 +129,27 @@ def update(table, id_):
     """
 
     # your code
+    for element in range(len(table)):
+        if id_[0] == table[element][0]:
+            id_index = element
+    
+    options = ['Name', 'Birth Year']
 
+
+    def choose():
+        while True:
+            ui.print_menu("HR item update", options, "Back to HR menu")
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            if option == "1":
+                table[id_index][1] = ui.get_inputs(["Please enter a name: "], "")[0]
+            elif option == "2":
+                table[id_index][2] = ui.get_inputs(["Please enter the birth year: "], "")[0]
+            elif option == "0":
+                break
+            else:
+                raise KeyError("There is no such option.")
+    choose()
     return table
 
 

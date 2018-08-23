@@ -41,4 +41,8 @@ def remove_function_common(table, id_):
     for element in range(len(table)):
         if id_[0] == table[element][0]:
             del table[element]
+
+    #if id_[0] == table[-1][0]:
+        #del table[element]
+        
     return table
