@@ -96,7 +96,7 @@ def add(table):
     """
 
     # your code
-    list_labels = ["title", "price", "month", "day", "year"]
+    list_labels = ["Please enter title: ", "Please enter price: ", "Please enter month: ", "Please enter day: ", "Please enter year: "]
     title = "Please enter title, price, month, day, year"
     common.add_function_common(table, list_labels, title)
     return table
@@ -146,7 +146,7 @@ def update(table, id_):
             inputs = ui.get_inputs(["number"], "Please enter a number: ")
             option = inputs[0]
             if option == "1":
-                table[id_index][1] = ui.get_inputs(["name"], "Please enter a title: ")[0]
+                table[id_index][1] = ui.get_inputs(["Please enter name: "], "")[0]
             elif option == "2":
                 table[id_index][2] = ui.get_inputs(["Please enter the price: "], "")[0]
             elif option == "3":
