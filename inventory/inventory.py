@@ -65,7 +65,7 @@ def start_module():
             elif option == "0":
                 break
             else:
-                raise KeyError("There is no such option.")
+                print("There is no such option.")
 
     choose()
 
@@ -134,33 +134,12 @@ def update(table, id_):
     """
 
     # your code
-    for element in range(len(table)):
-        if id_[0] == table[element][0]:
-            id_index = element
-    
-    options = ['Name', 'Manufacturer', 'Purchase year', 'Durability']
-
-
-    def choose():
-        while True:
-            ui.print_menu("Inventory item update", options, "Back to Inventory menu")
-            inputs = ui.get_inputs(["Please enter a number: "], "")
-            option = inputs[0]
-            if option == "1":
-                table[id_index][1] = ui.get_inputs(["Please enter a name: "], "")[0]
-            elif option == "2":
-                table[id_index][2] = ui.get_inputs(["Please enter the manufacturer: "], "")[0]
-            elif option == "3":
-                table[id_index][3] = ui.get_inputs(["Please enter purchase year: "], "")[0]
-            elif option == "4":
-                table[id_index][4] = ui.get_inputs(["Please enter durability: "], "")[0]
-            elif option == "0":
-                break
-            else:
-                raise KeyError("There is no such option.")
-    choose()
+    ui_options = ['Name', 'Manufacturer', 'Purchase year', 'Durability']
+    ui_title = "Inventory item update"
+    ui_exit_message = "Back to Inventory menu"
+    list_labels = ["Please enter a name: ", "Please enter the manufacturer: ", "Please enter purchase year: ", "Please enter durability: "]
+    table = common.update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels)
     return table
-
 
 # special functions:
 # ------------------

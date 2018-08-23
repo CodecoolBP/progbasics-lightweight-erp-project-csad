@@ -45,3 +45,46 @@ def remove_function_common(table, id_):
     print('\nID not found \n')
     
     return table
+
+
+def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels):
+    id_index = ''
+    for element in range(len(table)):
+        if id_[0] == table[element][0]:
+            id_index = element
+    if id_index == '':
+        print('\nID not found \n')
+        return table
+
+    def choose():
+        while True:
+            ui.print_menu(ui_title, ui_options, ui_exit_message)
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            if option == "1":
+                table[id_index][1] = ui.get_inputs([list_labels[0]], "")[0]
+            elif option == "2":
+                table[id_index][2] = ui.get_inputs([list_labels[1]], "")[0]
+            elif option == "3":
+                table[id_index][3] = ui.get_inputs([list_labels[2]], "")[0]
+            elif option == "4":
+                try:
+                    table[id_index][4] = ui.get_inputs([list_labels[3]], "")[0]
+                except IndexError:
+                    print("There is no such option.")
+            elif option == "5":
+                try:
+                    table[id_index][5] = ui.get_inputs([list_labels[4]], "")[0]
+                except IndexError:
+                    print("There is no such option.")
+            elif option == "6":
+                try:
+                    table[id_index][6] = ui.get_inputs([list_labels[5]], "")[0]
+                except IndexError:
+                    print("There is no such option.")
+            elif option == "0":
+                break
+            else:
+                print("There is no such option.")
+    choose()
+    return table

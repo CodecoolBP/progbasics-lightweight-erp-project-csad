@@ -60,7 +60,7 @@ def start_module():
             elif option == "0":
                 break
             else:
-                raise KeyError("There is no such option.")
+                print("There is no such option.")
     choose()
 
 def show_table(table):
@@ -130,7 +130,11 @@ def update(table, id_):
     """
 
     # your code
-
+    ui_options = ['Title', 'Manufacturer', 'Price', 'In stock']
+    ui_title = "Store item update"
+    ui_exit_message = "Back to Store menu"
+    list_labels = ['Please enter title:', 'Please enter manufacturer:', 'Please enter price:', 'Please enter in stock:']
+    table = common.update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels)
     return table
 
 
