@@ -96,7 +96,7 @@ def add(table):
     """
 
     # your code
-    list_labels = ["title", "price", "month", "day", "year"]
+    list_labels = ["Please enter title: ", "Please enter price: ", "Please enter month: ", "Please enter day: ", "Please enter year: "]
     title = "Please enter title, price, month, day, year"
     common.add_function_common(table, list_labels, title)
     return table
@@ -178,7 +178,7 @@ def get_lowest_price_item_id(table):
     Returns:
          string: id
     """
-    
+
     # your code
 
 

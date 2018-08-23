@@ -93,7 +93,7 @@ def add(table):
     """
 
     # your code
-    list_labels = ['name', 'birth year']
+    list_labels = ['Please enter name: ', 'Please enter birth year: ']
     title = "Please enter name and birth year"
     table = common.add_function_common(table, list_labels, title)
     return table
