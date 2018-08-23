@@ -59,7 +59,8 @@ def start_module():
                 result_oldest_person = get_oldest_person(table)
                 ui.print_result(result_oldest_person, "name of oldest person(s)")
             elif option == "6":
-                get_persons_closest_to_average(table)
+                persons = get_persons_closest_to_average(table)
+                ui.print_result(persons, "person(s) closest to average: ")
             elif option == "0":
                 answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
                 answer = answer_list[0].upper()
@@ -160,7 +161,6 @@ def get_oldest_person(table):
     """
 
     # your code
-    oldest_person_name = []
 
     oldest_person_birth_year = int(table[0][2])
     for i in range(len(table)):
@@ -188,3 +188,26 @@ def get_persons_closest_to_average(table):
     """
 
     # your code
+    sum_of_birth_year = 0
+
+    for i in range(len(table)):
+        sum_of_birth_year += int(table[i][2])
+
+    average_of_birth_years = round(sum_of_birth_year / len(table))
+
+
+    dists_to_avg = []
+    for i in range(len(table)):
+        dists_to_avg.append(abs(average_of_birth_years - int(table[i][2])))
+ 
+
+    min_dist = min(dists_to_avg)
+    
+
+    indexes_of_names_in_table = [i for i, num in enumerate(dists_to_avg) if num == min_dist]
+
+    name_closest_to_average = []
+    for j in range(len(indexes_of_names_in_table)):
+        name_closest_to_average.append(table[indexes_of_names_in_table[j]][1])
+    
+    return name_closest_to_average
