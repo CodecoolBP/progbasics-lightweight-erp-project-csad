@@ -59,9 +59,25 @@ def print_result(result, label):
     Returns:
         None: This function doesn't return anything it only prints to console.
     """
-
     # your code
-    print("The " + label + "is: " + result)
+    try:
+        result += result+' '
+        result = result[:-1]
+        result_type = 'str'
+    except TypeError:
+        try:
+            result.append('')
+            result.pop()
+            result_type = 'list'
+        except TypeError:
+            result_type = 'dict'
+    if result_type == 'str':
+        print("The " + label + "is: " + result)
+    elif result_type == 'list':
+        pass
+    else:
+        pass
+
 
 def print_menu(title, list_options, exit_message):
     """

@@ -58,7 +58,13 @@ def start_module():
             elif option == "6":
                 get_average_by_manufacturer(table, manufacturer)
             elif option == "0":
-                break
+                answer = input("Do you want to save the changes? (Y/N)").upper()
+                if answer == "Y":
+                    data_manager.write_table_to_file('store/games.csv', table)
+                elif answer == "N":
+                    break
+                else:
+                    print("Invalid answer.")
             else:
                 print("There is no such option.")
     choose()

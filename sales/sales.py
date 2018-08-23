@@ -66,7 +66,7 @@ def start_module():
                 month_from = ui.get_inputs(["Please enter a month(from): "], "")
                 day_from = ui.get_inputs(["Please enter a day(from): "], "")
                 year_from = ui.get_inputs(["Please enter a year(from): "], "")
-                
+
                 result_sold_between = get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
                 label_sold = "items sold between"
                 ui.print_result(result_sold_between, label_sold)
@@ -75,6 +75,7 @@ def start_module():
             
                 if answer == "Y":
                     data_manager.write_table_to_file('sales/sales.csv', table)
+                    break
                 elif answer == "N":
                     break
                 else:
