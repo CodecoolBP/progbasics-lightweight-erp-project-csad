@@ -115,7 +115,7 @@ def get_inputs(list_labels, title):
 
     # your code
     for i in range(len(list_labels)):
-        inputs.append(input('Please enter '+list_labels[i]+'\n\t'))
+        inputs.append(input(list_labels[i]+'\n\t'))
 
     return inputs
 

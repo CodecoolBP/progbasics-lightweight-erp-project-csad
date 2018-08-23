@@ -43,5 +43,5 @@ def remove_function_common(table, id_):
             del table[element]
             return table
     print('\nID not found \n')
-
+    
     return table

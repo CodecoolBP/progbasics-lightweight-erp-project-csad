@@ -48,10 +48,10 @@ def start_module():
             elif option == "2":
                 add(table)
             elif option == "3":
-                id_ = ui.get_inputs(['id'], "Please enter ID")
+                id_ = ui.get_inputs(['Please enter ID:'], "")
                 remove(table, id_)
             elif option == "4":
-                id_ = ui.get_inputs(['id'], "Please enter ID")
+                id_ = ui.get_inputs(['Please enter ID:'], "")
                 update(table, id_)
             elif option == "5":
                 get_counts_by_manufacturers(table)
@@ -91,7 +91,7 @@ def add(table):
         list: Table with a new record
     """
     # your code
-    list_labels = ['title', 'manufacturer', 'price', 'in stock']
+    list_labels = ['Please enter title:', 'Please enter manufacturer:', 'Please enter price:', 'Please enter in stock:']
     title = "Please enter title, manufacturer, price and the amount in stock"
     table = common.add_function_common(table, list_labels, title)
     return table
