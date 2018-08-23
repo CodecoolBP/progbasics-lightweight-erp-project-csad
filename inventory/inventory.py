@@ -16,6 +16,7 @@ import ui
 import data_manager
 # common module
 import common
+from datetime import datetime
 
 
 def start_module():
@@ -59,11 +60,19 @@ def start_module():
                 id_ = ui.get_inputs(['Please enter ID'], "")
                 update(table, id_)
             elif option == "5":
-                get_available_items(table)
+                avaible_items = get_available_items(table)
+                ui.print_result(avaible_items, 'The avaible items are: ')
             elif option == "6":
                 get_average_durability_by_manufacturers(table)
             elif option == "0":
-                break
+                answer = input("Do you want to save the changes? (Y/N)").upper()
+                if answer == "Y":
+                    data_manager.write_table_to_file('inventory/inventory.csv', table)
+                    break
+                elif answer == "N":
+                    break
+                else:
+                    print("Invalid answer.")
             else:
                 print("There is no such option.")
 
@@ -156,7 +165,14 @@ def get_available_items(table):
     """
 
     # your code
-
+    current_year = int(datetime.now().year)
+    avaible_items = []
+    for i in range(len(table)):
+        if current_year <= int(table[i][3])+int(table[i][4]):
+            avaible_items.append(table[i])
+    if not avaible_items:
+        avaible_items = ['All of the items are expired.']
+    return avaible_items
 
 def get_average_durability_by_manufacturers(table):
     """

@@ -69,6 +69,7 @@ def start_module():
             
                 if answer == "Y":
                     data_manager.write_table_to_file('sales/sales.csv', table)
+                    break
                 elif answer == "N":
                     break
                 else:
@@ -197,6 +198,4 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     """
 
     # your code
-    for i in range(len(table)):
-        for j in range(len(table[i])):
-            
+      
