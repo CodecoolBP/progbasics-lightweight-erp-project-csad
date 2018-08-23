@@ -53,10 +53,10 @@ def start_module():
             elif option == "2":
                 add(table)
             elif option == "3":
-                id_ = ui.get_inputs(['id'], "Please enter ID")
+                id_ = ui.get_inputs(['Please enter ID'], "")
                 remove(table, id_)
             elif option == "4":
-                id_ = ui.get_inputs(['id'], "Please enter ID")
+                id_ = ui.get_inputs(['Please enter ID'], "")
                 update(table, id_)
             elif option == "5":
                 get_available_items(table)
@@ -97,7 +97,7 @@ def add(table):
     """
 
     # your code
-    list_labels = ['name', 'manufacturer', 'purchase year', 'durability']
+    list_labels = ['Please enter name:', 'Please enter manufacturer:', 'Please enter purchase year:', 'Please enter durability:']
     title = "Please enter name, manufacturer, purchase year and durability"
     table = common.add_function_common(table, list_labels, title)
     return table
