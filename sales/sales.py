@@ -67,7 +67,7 @@ def start_module():
             elif option == "0":
                 break
             else:
-                raise KeyError("There is no such option.")
+                print("There is no such option.")
 
     choose()
 
