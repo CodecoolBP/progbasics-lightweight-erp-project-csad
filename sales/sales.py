@@ -30,7 +30,44 @@ def start_module():
     """
 
     # your code
+    try:
+        if table is False:
+            pass
+    except UnboundLocalError:
+        table = data_manager.get_table_from_file('sales/sales.csv')
+    
+    options = ["Show table",
+               "Add",
+               "Remove",
+               "Update",
+               "Get lowest price item ID",
+               "Get items sold"]
+    
+    def choose():
+        while True:
+            ui.print_menu("Sales", options, "Back to main menu")
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            if option == "1":
+                show_table(table)
+            elif option == "2":
+                add(table)
+            elif option == "3":
+                id_ = ui.get_inputs(['id'], "Please enter ID")
+                remove(table, id_)
+            elif option == "4":
+                id_ = ui.get_inputs(['id'], "Please enter ID")
+                update(table, id_)
+            elif option == "5":
+                get_lowest_price_item_id(table)
+            elif option == "6":
+                get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
+            elif option == "0":
+                break
+            else:
+                raise KeyError("There is no such option.")
 
+    choose()
 
 def show_table(table):
     """
@@ -44,7 +81,8 @@ def show_table(table):
     """
 
     # your code
-
+    title_list = ["id", "title", "price", "month", "day", "year"]
+    ui.print_table(table, title_list)
 
 def add(table):
     """
@@ -58,7 +96,9 @@ def add(table):
     """
 
     # your code
-
+    list_labels = ["title", "price", "month", "day", "year"]
+    title = "Please enter title, price, month, day, year"
+    common.add_function_common(table, list_labels, title)
     return table
 
 
@@ -75,7 +115,8 @@ def remove(table, id_):
     """
 
     # your code
-
+    table = common.remove_function_common(table, id_)
+    
     return table
 
 
@@ -92,8 +133,35 @@ def update(table, id_):
     """
 
     # your code
+    for element in range(len(table)):
+        if id_[0] == table[element][0]:
+            id_index = element
+    
+    options = ['Title', 'Price', 'Month', 'Day', 'Year']
 
+
+    def choose():
+        while True:
+            ui.print_menu("Sales item update", options, "Back to Sales menu")
+            inputs = ui.get_inputs(["number"], "Please enter a number: ")
+            option = inputs[0]
+            if option == "1":
+                table[id_index][1] = ui.get_inputs(["name"], "Please enter a title: ")[0]
+            elif option == "2":
+                table[id_index][2] = ui.get_inputs(["Please enter the price: "], "")[0]
+            elif option == "3":
+                table[id_index][3] = ui.get_inputs(["Please enter the month of the sale: "], "")[0]
+            elif option == "4":
+                table[id_index][4] = ui.get_inputs(["Please enter the day of the sale: "], "")[0]
+            elif option == "4":
+                table[id_index][5] = ui.get_inputs(["Please enter the year of the sale: "], "")[0]
+            elif option == "0":
+                break
+            else:
+                raise KeyError("There is no such option.")
+    choose()
     return table
+
 
 
 # special functions:
