@@ -60,7 +60,14 @@ def start_module():
             elif option == "6":
                 get_persons_closest_to_average(table)
             elif option == "0":
-                break
+                answer = input("Do you want to save the changes? (Y/N)").upper()
+            
+                if answer == "Y":
+                    data_manager.write_table_to_file('hr/persons.csv', table)
+                elif answer == "N":
+                    break
+                else:
+                    print("Invalid answer.")
             else:
                 print("There is no such option.")
 
@@ -129,27 +136,11 @@ def update(table, id_):
     """
 
     # your code
-    for element in range(len(table)):
-        if id_[0] == table[element][0]:
-            id_index = element
-    
-    options = ['Name', 'Birth Year']
-
-
-    def choose():
-        while True:
-            ui.print_menu("HR item update", options, "Back to HR menu")
-            inputs = ui.get_inputs(["Please enter a number: "], "")
-            option = inputs[0]
-            if option == "1":
-                table[id_index][1] = ui.get_inputs(["Please enter a name: "], "")[0]
-            elif option == "2":
-                table[id_index][2] = ui.get_inputs(["Please enter the birth year: "], "")[0]
-            elif option == "0":
-                break
-            else:
-                raise KeyError("There is no such option.")
-    choose()
+    ui_options = ["Name", "Birth Year"]
+    ui_title = "HR item update"
+    ui_exit_message = "Back to Inventory menu"
+    list_labels = ['Please enter name: ', 'Please enter birth year: ']
+    table = update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels)
     return table
 
 
