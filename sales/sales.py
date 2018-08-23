@@ -146,7 +146,7 @@ def update(table, id_):
             inputs = ui.get_inputs(["number"], "Please enter a number: ")
             option = inputs[0]
             if option == "1":
-                table[id_index][1] = ui.get_inputs(["name"], "Please enter a title: ")[0]
+                table[id_index][1] = ui.get_inputs(["Please enter name: "], "")[0]
             elif option == "2":
                 table[id_index][2] = ui.get_inputs(["Please enter the price: "], "")[0]
             elif option == "3":
@@ -178,7 +178,7 @@ def get_lowest_price_item_id(table):
     Returns:
          string: id
     """
-
+    
     # your code
 
 
