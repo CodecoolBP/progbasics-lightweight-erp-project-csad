@@ -63,26 +63,29 @@ def start_module():
                 label_id = "lowest price item id"
                 ui.print_result(result_id, label_id)
             elif option == "6":
-                month_from = ui.get_inputs(["Please enter a month(from): "], "")
-                day_from = ui.get_inputs(["Please enter a day(from): "], "")
-                year_from = ui.get_inputs(["Please enter a year(from): "], "")
-
+                date_from = ui.get_inputs(["month(from)", "day(from)", "year(from)"], "Please enter date(from): ")
+                month_from = str(date_from[0])
+                day_from = str(date_from[1])
+                year_from = str(date_from[2])
+                date_to = ui.get_inputs(["month(to)", "day(to)", "year(to)"], "Please enter date(to): ")
+                month_to = str(date_to[0])
+                day_to = str(date_to[1])
+                year_to = str(date_to[2])
                 result_sold_between = get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
                 label_sold = "items sold between"
                 ui.print_result(result_sold_between, label_sold)
             elif option == "0":
-                answer = input("Do you want to save the changes? (Y/N)").upper()
-            
+                answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
+                answer = answer_list[0].upper()
                 if answer == "Y":
-                    data_manager.write_table_to_file('sales/sales.csv', table)
-                    break
+                    data_manager.write_table_to_file('store/games.csv', table)
                 elif answer == "N":
                     break
                 else:
-                    print("Invalid answer.")
-
+                    ui.print_error_message("Invalid answer.")
             else:
-                print("There is no such option.")
+                ui.print_error_message("There is no such option.")
+
 
     choose()
 
@@ -207,26 +210,26 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     new_table = []
 
     from_date = str(year_from) 
-    if month_from >= 10:
+    if int(month_from) >= 10:
         from_date += str(month_from)
-    elif month_from < 10:
+    elif int(month_from) < 10:
         from_date += str(0) + str(month_from)
 
-    if day_from >= 10:
+    if int(day_from) >= 10:
         from_date += str(day_from)
-    elif day_from < 10:
+    elif int(day_from) < 10:
         from_date += str(0) + str(day_from)
     
 
     to_date = str(year_to)
-    if month_to >= 10:
+    if int(month_to) >= 10:
         to_date += str(month_to)
-    elif month_to < 10:
+    elif int(month_to) < 10:
         to_date += str(0) + str(month_to)
 
-    if day_to >= 10:
+    if int(day_to) >= 10:
         to_date += str(day_to)
-    elif day_to < 10:
+    elif int(day_to) < 10:
         to_date += str(0) + str(day_to)
 
     for i in range(len(table)):
