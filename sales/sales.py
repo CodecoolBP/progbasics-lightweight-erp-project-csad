@@ -60,10 +60,16 @@ def start_module():
                 update(table, id_)
             elif option == "5":
                 result_id = get_lowest_price_item_id(table)
-                label_id = "\"lowest price item id\""
+                label_id = "lowest price item id"
                 ui.print_result(result_id, label_id)
             elif option == "6":
-                get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
+                month_from = ui.get_inputs(["Please enter a month(from): "], "")
+                day_from = ui.get_inputs(["Please enter a day(from): "], "")
+                year_from = ui.get_inputs(["Please enter a year(from): "], "")
+
+                result_sold_between = get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
+                label_sold = "items sold between"
+                ui.print_result(result_sold_between, label_sold)
             elif option == "0":
                 answer = input("Do you want to save the changes? (Y/N)").upper()
             
@@ -198,4 +204,27 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     """
 
     # your code
-      
+    new_table = []
+
+    from_date = int(str(year_from) + str(month_from) + str(day_from))
+    to_date = int(str(year_to) + str(month_to) + str(day_to))
+
+    sale_date_as_string = ""
+    sale_date = float(sale_date_as_string)
+
+    for i in range(len(table)):
+        for j in range(len(table[i])):
+            sale_date_as_string += table[i][5]
+            sale_date_as_string += table[i][3]
+            sale_date_as_string += table[i][4]
+            if from_date < sale_date < to_date:
+                new_table.append(table[i])
+    
+    return new_table
+            
+                        
+                    
+                    
+
+                
+            
