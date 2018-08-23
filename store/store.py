@@ -58,15 +58,17 @@ def start_module():
             elif option == "6":
                 get_average_by_manufacturer(table, manufacturer)
             elif option == "0":
-                answer = input("Do you want to save the changes? (Y/N)").upper()
+                answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
+                answer = answer_list[0].upper()
                 if answer == "Y":
                     data_manager.write_table_to_file('store/games.csv', table)
                 elif answer == "N":
                     break
                 else:
-                    print("Invalid answer.")
+                    ui.print_error_message("Invalid answer.")
             else:
-                print("There is no such option.")
+                ui.print_error_message("There is no such option.")
+                
     choose()
 
 def show_table(table):

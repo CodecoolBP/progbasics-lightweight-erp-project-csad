@@ -61,21 +61,27 @@ def start_module():
                 update(table, id_)
             elif option == "5":
                 avaible_items = get_available_items(table)
-                ui.print_result(avaible_items, 'The avaible items are: ')
+                title_list = ['id', 'name', 'manufacturer', 'purchase year', 'durability']
+                if avaible_items[0] != 'All of the items are expired.':
+                    ui.print_result('', 'avaible item list ')
+                    ui.print_table(avaible_items, title_list)
+                else:
+                    ui.print_result(avaible_items[0], 'avaible item list ')
             elif option == "6":
                 get_average_durability_by_manufacturers(table)
             elif option == "0":
-                answer = input("Do you want to save the changes? (Y/N)").upper()
+                answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
+                answer = answer_list[0].upper()
                 if answer == "Y":
                     data_manager.write_table_to_file('inventory/inventory.csv', table)
                     break
                 elif answer == "N":
                     break
                 else:
-                    print("Invalid answer.")
+                    ui.print_error_message("Invalid answer.")
             else:
-                print("There is no such option.")
-
+                ui.print_error_message("There is no such option.")
+                
     choose()
 
 def show_table(table):
@@ -173,6 +179,7 @@ def get_available_items(table):
     if not avaible_items:
         avaible_items = ['All of the items are expired.']
     return avaible_items
+
 
 def get_average_durability_by_manufacturers(table):
     """

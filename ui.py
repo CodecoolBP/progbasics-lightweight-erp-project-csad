@@ -61,7 +61,7 @@ def print_result(result, label):
     """
     # your code
     try:
-        result += result+' '
+        result = result+' '
         result = result[:-1]
         result_type = 'str'
     except TypeError:
@@ -72,9 +72,11 @@ def print_result(result, label):
         except TypeError:
             result_type = 'dict'
     if result_type == 'str':
-        print("The " + label + "is: " + result)
+        print("\nThe " + label + "is: " + result)
     elif result_type == 'list':
-        pass
+        print('\n'+label)
+        for element in result:
+            print('\t'+str(element))
     else:
         pass
 
