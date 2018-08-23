@@ -206,21 +206,49 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     # your code
     new_table = []
 
-    from_date = int(str(year_from) + str(month_from) + str(day_from))
-    to_date = int(str(year_to) + str(month_to) + str(day_to))
+    from_date = str(year_from) 
+    if month_from >= 10:
+        from_date += str(month_from)
+    elif month_from < 10:
+        from_date += str(0) + str(month_from)
 
-    sale_date_as_string = ""
-    sale_date = float(sale_date_as_string)
+    if day_from >= 10:
+        from_date += str(day_from)
+    elif day_from < 10:
+        from_date += str(0) + str(day_from)
+    
+
+    to_date = str(year_to)
+    if month_to >= 10:
+        to_date += str(month_to)
+    elif month_to < 10:
+        to_date += str(0) + str(month_to)
+
+    if day_to >= 10:
+        to_date += str(day_to)
+    elif day_to < 10:
+        to_date += str(0) + str(day_to)
 
     for i in range(len(table)):
-        for j in range(len(table[i])):
-            sale_date_as_string += table[i][5]
+        sale_date_as_string = ""
+        sale_date_as_string += table[i][5]
+        
+        if int(table[i][3]) >= 10:
             sale_date_as_string += table[i][3]
+        elif int(table[i][3]) < 10:
+            sale_date_as_string += str(0) + table[i][3]
+
+        if int(table[i][4]) >= 10:
             sale_date_as_string += table[i][4]
-            if from_date < sale_date < to_date:
-                new_table.append(table[i])
-    
+        elif int(table[i][4]) < 10:
+            sale_date_as_string += str(0) + table[i][4]
+        
+        if int(from_date) < int(sale_date_as_string) < int(to_date):
+            new_table.append(table[i])
+            sale_date_as_string = ""
+
     return new_table
+
             
                         
                     
