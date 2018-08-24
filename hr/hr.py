@@ -188,25 +188,23 @@ def get_persons_closest_to_average(table):
     """
 
     # your code
-    current_year = 2018
-
-    sum_of_age = 0
+    sum_of_birth_year = 0
 
     for i in range(len(table)):
-        sum_of_age += (current_year - int(table[i][2]))
+        sum_of_birth_year += int(table[i][2])
+
+    average_of_birth_years = round(sum_of_birth_year / len(table))
 
 
-    average_of_ages = round(sum_of_age / len(table))
-
-    dist_from_avg = []
+    dists_to_avg = []
     for i in range(len(table)):
-        dist_from_avg.append(abs(average_of_ages - (current_year - int(table[i][2]))))
+        dists_to_avg.append(abs(average_of_birth_years - int(table[i][2])))
+ 
 
-
-    min_dist = min(dist_from_avg)
+    min_dist = min(dists_to_avg)
     
 
-    indexes_of_names_in_table = [i for i, num in enumerate(dist_from_avg) if num == min_dist]
+    indexes_of_names_in_table = [i for i, num in enumerate(dists_to_avg) if num == min_dist]
 
     name_closest_to_average = []
     for j in range(len(indexes_of_names_in_table)):
