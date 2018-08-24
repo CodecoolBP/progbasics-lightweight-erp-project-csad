@@ -29,7 +29,12 @@ def start_module():
     """
     
     # your code
-    table = data_manager.get_table_from_file('store/games.csv')
+    try:
+        if table is False:
+            pass
+    except UnboundLocalError:
+        table = data_manager.get_table_from_file('store/games.csv')
+    
     options = ["Show table",
                "Add",
                "Remove",
