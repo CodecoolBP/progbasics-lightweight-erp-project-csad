@@ -126,7 +126,7 @@ def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, li
                 elif types[1] == "year":
                     while True:
                         year_input = ui.get_inputs([list_labels[1]], "")[0] 
-                        if year_input_check(year_input[0]):
+                        if year_input_check(year_input):
                             table[id_index][2] = year_input
                             break
                         ui.print_error_message("Invalid entry.")
