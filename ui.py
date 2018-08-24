@@ -69,7 +69,7 @@ def print_result(result, label):
             result.append('')
             result.pop()
             result_type = 'list'
-        except TypeError:
+        except (ValueError, AttributeError):
             result_type = 'dict'
     if result_type == 'str':
         print("\nThe " + label + "is: " + result)
@@ -78,7 +78,9 @@ def print_result(result, label):
         for element in result:
             print('\t'+str(element))
     else:
-        pass
+        print("\nThe " + label + "is: ")
+        for key in result:
+            print('\t',key, ':', result[key])
 
 
 def print_menu(title, list_options, exit_message):

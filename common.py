@@ -42,7 +42,7 @@ def remove_function_common(table, id_):
         if id_[0] == table[element][0]:
             del table[element]
             return table
-    print('\nID not found \n')
+    ui.print_error_message('\nID not found \n')
     
     return table
 
@@ -53,7 +53,7 @@ def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, li
         if id_[0] == table[element][0]:
             id_index = element
     if id_index == '':
-        print('\nID not found \n')
+        ui.print_error_message('\nID not found \n')
         return table
 
     def choose():
@@ -71,20 +71,20 @@ def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, li
                 try:
                     table[id_index][4] = ui.get_inputs([list_labels[3]], "")[0]
                 except IndexError:
-                    print("There is no such option.")
+                    ui.print_error_message("There is no such option.")
             elif option == "5":
                 try:
                     table[id_index][5] = ui.get_inputs([list_labels[4]], "")[0]
                 except IndexError:
-                    print("There is no such option.")
+                    ui.print_error_message("There is no such option.")
             elif option == "6":
                 try:
                     table[id_index][6] = ui.get_inputs([list_labels[5]], "")[0]
                 except IndexError:
-                    print("There is no such option.")
+                    ui.print_error_message("There is no such option.")
             elif option == "0":
                 break
             else:
-                print("There is no such option.")
+                ui.print_error_message("There is no such option.")
     choose()
     return table

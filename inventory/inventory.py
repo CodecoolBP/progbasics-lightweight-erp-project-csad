@@ -68,7 +68,8 @@ def start_module():
                 else:
                     ui.print_result(avaible_items[0], 'avaible item list ')
             elif option == "6":
-                get_average_durability_by_manufacturers(table)
+                average_dur = get_average_durability_by_manufacturers(table)
+                ui.print_result(average_dur, 'average durability by manufacturers list ')
             elif option == "0":
                 answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
                 answer = answer_list[0].upper()
@@ -193,3 +194,20 @@ def get_average_durability_by_manufacturers(table):
     """
 
     # your code
+    manufacturers = []
+    count_by_manufacturer = []
+    average_durability_by_manufacturers = {}
+    for i in range(len(table)):
+        if table[i][2] in average_durability_by_manufacturers:
+            average_durability_by_manufacturers[table[i][2]] += int(table[i][4])
+            for j in range(len(manufacturers)):
+                if manufacturers[j] == table[i][2]:
+                    count_by_manufacturer[j] += 1
+        else:
+            average_durability_by_manufacturers[table[i][2]] = 0
+            manufacturers.append(table[i][2])
+            count_by_manufacturer.append(0)
+    for k in range(len(manufacturers)):
+        average_durability_by_manufacturers[manufacturers[k]] = average_durability_by_manufacturers[manufacturers[k]]/count_by_manufacturer[k]
+
+    return(average_durability_by_manufacturers)
