@@ -59,9 +59,12 @@ def start_module():
                 id_ = ui.get_inputs(['Please enter ID:'], "")
                 update(table, id_)
             elif option == "5":
-                get_counts_by_manufacturers(table)
+                counts_by_manufacturers = get_counts_by_manufacturers(table)
+                ui.print_result(counts_by_manufacturers, 'number of games are available of each manufacturer list ')
             elif option == "6":
-                get_average_by_manufacturer(table, manufacturer)
+                manufacturer_input = ui.get_inputs(['Please enter manufacturer:'], "")
+                average_stock = get_average_by_manufacturer(table, manufacturer_input)
+                ui.print_result(average_stock, 'average stock by manufacturers ')
             elif option == "0":
                 answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
                 answer = answer_list[0].upper()
@@ -167,6 +170,15 @@ def get_counts_by_manufacturers(table):
 
     # your code
 
+    counts_by_manufacturers = {}
+    for i in range(len(table)):
+        if table[i][2] in counts_by_manufacturers:
+            counts_by_manufacturers[table[i][2]] += 1
+        else:
+            counts_by_manufacturers[table[i][2]] = 0
+
+    return(counts_by_manufacturers)
+
 
 def get_average_by_manufacturer(table, manufacturer):
     """
@@ -181,5 +193,15 @@ def get_average_by_manufacturer(table, manufacturer):
     """
 
     # your code
+    in_stock = 0
+    count_by_manufacturer = 0
+    for i in range(len(table)):
+        if manufacturer[0] == table[i][2]:
+            in_stock += int(table[i][4])
+            count_by_manufacturer += 1
+    try:
+        average_stock_by_manufacturer = str(in_stock/count_by_manufacturer)
+    except ZeroDivisionError:
+        average_stock_by_manufacturer = 'No such manufacturer'
 
-
+    return average_stock_by_manufacturer
