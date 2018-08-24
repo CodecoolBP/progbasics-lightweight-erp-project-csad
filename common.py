@@ -79,7 +79,7 @@ def remove_function_common(table, id_):
     return table
 
 
-def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels):
+def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels, types):
     """
     Update function for all moduls:
          - all of the other entries are inputs made by user using ui.get_inputs(list_labels, title)
@@ -91,6 +91,7 @@ def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, li
         ui_options (list): list of strings - options that will be shown in choose menu
         ui_exit_message (str): the last option with (0) (example: "Back to main menu")
         list_labels (list): labels of inputs      
+        types (list): types of list_labels ('str', 'int', 'year', 'month', 'day', 'str_int')
 
     Returns:
         list: table with updated record
@@ -114,28 +115,52 @@ def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, li
             if option == "1":
                 table[id_index][1] = ui.get_inputs([list_labels[0]], "")[0]
             elif option == "2":
-                table[id_index][2] = ui.get_inputs([list_labels[1]], "")[0]
-                if list_labels[1] == "Please enter the manufacturer:":
-                    try:
-                        table[id_index][2] = int(table[id_index][2])
-                        ui.print_error_message("Invalid answer.")
-                        table[id_index][2] = str(table[id_index][2])
-                    except (TypeError, ValueError): 
-                        pass
-                elif list_labels[1] == "Please enter price:" or list_labels[1] == "Please enter birth year:":
-                    try:
-                        table[id_index][2] = int(table[id_index][2])
-                        table[id_index][2] = str(table[id_index][2
-                    except (TypeError, ValueError):
-                        ui.print_error_message("Invalid answer.")
+                if types[1] == "int":
+                    while True:
+                        num_input = ui.get_inputs([list_labels[1]], "")[0] 
+                        if int_input_check(num_input[0]):
+                            table[id_index][2] = num_input
+                            break
+                        ui.print_error_message("Invalid entry.")
+                                             
+                elif types[1] == "year":
+                    while True:
+                        year_input = ui.get_inputs([list_labels[1]], "")[0] 
+                        if year_input_check(year_input[0]):
+                            table[id_index][2] = year_input
+                            break
+                        ui.print_error_message("Invalid entry.")
+                
+                elif types[0] == "month":
+                    while True:
+                        month_input = ui.get_inputs([list_labels[1]], "")[0] 
+                        if month_input_check(month_input[0]):
+                            table[id_index][2] = month_input
+                            break
+                        ui.print_error_message("Invalid entry.")
+                
+                elif types[0] == "day":
+                    while True:
+                        day_input = ui.get_inputs([list_labels[1]], "")[0] 
+                        if day_input_check(day_input[0]):
+                            table[id_index][2] = day_input
+                            break
+                        ui.print_error_message("Invalid entry.")
+
+                elif types[0] == 'str':
+                    while True:
+                        str_input = ui.get_inputs([list_labels[1]], "")[0] 
+                        if str_input_check(str_input[0]):
+                            table[id_index][2] = str_input
+                            break
+                        ui.print_error_message("Invalid entry.")
+                else:
+                    table[id_index][2] = ui.get_inputs([list_labels[0]], "")[0]
+                             
             elif option == "3":
                 table[id_index][3] = ui.get_inputs([list_labels[2]], "")[0]
-                if list_labels[2] == "Please enter price:":
-                    try:
-                        table[id_index][2] = int(table[id_index][2])
-                        table[id_index][2] = str(table[id_index][2
-                    except (TypeError, ValueError):
-                        ui.print_error_message("Invalid answer.")
+                #if list_labels[2] == "Please enter price:":
+                    
             elif option == "4":
                 try:
                     table[id_index][4] = ui.get_inputs([list_labels[3]], "")[0]
@@ -158,13 +183,36 @@ def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, li
     choose()
     return table
 
-def str_input_check():
     
-def int_input_check():
+def int_input_check(int_input):
+    try:
+        int_input = int(int_input)
+    except (ValueError, TypeError):
+        return False
+    return True
     
-def year_input_check():
+def year_input_check(year_input):
+    if len(year_input) != 4:
+        return False
+    return int_input_check(year_input)
+    
 
-def month_input_check():
+def month_input_check(month_input):
+    if int_input_check(month_input):
+        if 0 < month_input < 13:
+            return True
+    return False
 
-def day_input_check():
+def day_input_check(day_input):
+    if int_input_check(day_input):
+        if 0 < day_input < 32:
+            return True
+    return False
 
+def str_input_check(str_input):
+    if not int_input_check(str_input):
+        return True
+
+
+def types_check():
+    pass

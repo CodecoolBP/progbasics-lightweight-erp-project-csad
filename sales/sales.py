@@ -157,7 +157,8 @@ def update(table, id_):
     ui_options = ["Title", "Price", "Month", "Day", "Year"]
     ui_exit_message = "Back to Inventory menu"
     list_labels = ["Please enter title: ", "Please enter price:", "Please enter month: ", "Please enter day: ", "Please enter year: "]
-    table = common.update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels)
+    types = ['str_int', 'int', 'month', 'day', 'year']
+    table = common.update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels, types)
     return table
 
 

@@ -142,7 +142,8 @@ def update(table, id_):
     ui_title = "HR item update"
     ui_exit_message = "Back to Inventory menu"
     list_labels = ['Please enter name: ', 'Please enter birth year:']
-    table = update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels)
+    types = ['str', 'year']
+    table = common.update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels, types)
     return table
 
 
