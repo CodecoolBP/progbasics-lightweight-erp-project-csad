@@ -65,8 +65,27 @@ def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, li
                 table[id_index][1] = ui.get_inputs([list_labels[0]], "")[0]
             elif option == "2":
                 table[id_index][2] = ui.get_inputs([list_labels[1]], "")[0]
+                if list_labels[1] == "Please enter the manufacturer:":
+                    try:
+                        table[id_index][2] = int(table[id_index][2])
+                        ui.print_error_message("Invalid answer.")
+                        table[id_index][2] = str(table[id_index][2])
+                    except (TypeError, ValueError): 
+                        pass
+                elif list_labels[1] == "Please enter price:" or list_labels[1] == "Please enter birth year:":
+                    try:
+                        table[id_index][2] = int(table[id_index][2])
+                        table[id_index][2] = str(table[id_index][2
+                    except (TypeError, ValueError):
+                        ui.print_error_message("Invalid answer.")
             elif option == "3":
                 table[id_index][3] = ui.get_inputs([list_labels[2]], "")[0]
+                if list_labels[2] == "Please enter price:":
+                    try:
+                        table[id_index][2] = int(table[id_index][2])
+                        table[id_index][2] = str(table[id_index][2
+                    except (TypeError, ValueError):
+                        ui.print_error_message("Invalid answer.")
             elif option == "4":
                 try:
                     table[id_index][4] = ui.get_inputs([list_labels[3]], "")[0]
@@ -88,3 +107,14 @@ def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, li
                 ui.print_error_message("There is no such option.")
     choose()
     return table
+
+def str_input_check():
+    
+def int_input_check():
+    
+def year_input_check():
+
+def month_input_check():
+
+def day_input_check():
+
