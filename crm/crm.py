@@ -29,6 +29,53 @@ def start_module():
 
     # your code
 
+    try:
+        if table is False:
+            pass
+    except UnboundLocalError:
+        table = data_manager.get_table_from_file('crm/customers.csv')
+    options = ["Show table",
+               "Add",
+               "Remove",
+               "Update",
+               "Get longest name ID",
+               "Get subscribed emails"]
+
+
+    def choose():
+        while True:
+            ui.print_menu("CRM", options, "Back to main menu")
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            if option == "1":
+                show_table(table)
+            elif option == "2":
+                add(table)
+            elif option == "3":
+                id_ = ui.get_inputs(['Please enter ID'], "")
+                remove(table, id_)
+            elif option == "4":
+                id_ = ui.get_inputs(['Please enter ID'], "")
+                update(table, id_)
+            elif option == "5":
+                
+            elif option == "6":
+                
+            elif option == "0":
+                answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
+                answer = answer_list[0].upper()
+                if answer == "Y":
+                    data_manager.write_table_to_file('crm/customers.csv', table)
+                elif answer == "N":
+                    break
+                else:
+                    ui.print_error_message("Invalid answer.")
+            else:
+                ui.print_error_message("There is no such option.")
+
+    choose()
+
+
 
 def show_table(table):
     """
@@ -42,6 +89,9 @@ def show_table(table):
     """
 
     # your code
+
+    title_list = ['id', 'name', 'email', 'subscribed']
+    ui.print_table(table, title_list)
 
 
 def add(table):
@@ -57,6 +107,9 @@ def add(table):
 
     # your code
 
+    list_labels = ['Please enter name: ', 'Please enter email: ', 'Please enter subscribed (1/0): ']
+    title = "Please enter name, email and subscribed"
+    table = common.add_function_common(table, list_labels, title)
     return table
 
 
@@ -74,6 +127,7 @@ def remove(table, id_):
 
     # your code
 
+    table = common.remove_function_common(table, id_)
     return table
 
 
@@ -91,6 +145,11 @@ def update(table, id_):
 
     # your code
 
+    ui_options = ['Name', 'Email', 'Subscribed']
+    ui_title = "CRM item update"
+    ui_exit_message = "Back to CRM menu"
+    list_labels = ['Please enter name: ', 'Please enter email: ', 'Please enter subscribed: ']
+    table = common.update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels)
     return table
 
 
@@ -110,6 +169,18 @@ def get_longest_name_id(table):
         """
 
     # your code
+
+    longest_name_length = 0
+    current_longest_list = [[]]
+    for lines in table:
+        if len(lines[1]) > longest_name_length:
+            longest_name_length = len(lines[1])
+            current_longest_list[0].append(lines[0])
+            current_longest_list[0].append(lines[1])
+        if len(lines[1]) == longest_name_length:
+            current_longest_list[0].append(lines[0])
+            current_longest_list[0].append(lines[1])
+    print(current_longest_list)
 
 
 # the question: Which customers has subscribed to the newsletter?
