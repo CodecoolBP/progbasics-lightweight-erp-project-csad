@@ -65,7 +65,7 @@ def start_module():
                 answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
                 answer = answer_list[0].upper()
                 if answer == "Y":
-                    data_manager.write_table_to_file('store/games.csv', table)
+                    data_manager.write_table_to_file('hr/persons.csv', table)
                 elif answer == "N":
                     break
                 else:
@@ -140,7 +140,7 @@ def update(table, id_):
     # your code
     ui_options = ["Name", "Birth Year"]
     ui_title = "HR item update"
-    ui_exit_message = "Back to Inventory menu"
+    ui_exit_message = "Back to HR menu"
     list_labels = ['Please enter name: ', 'Please enter birth year:']
     types = ['str', 'year']
     table = common.update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels, types)
