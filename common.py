@@ -233,7 +233,6 @@ def table_column_exist(table, id_index, list_labels, option, types):
     '''
 
     try:
-        table[id_index][int(option)] = ui.get_inputs([list_labels[int(option) - 1]], "")[0]
         types_check_for_update_function(table, types, list_labels, id_index, option)
     except IndexError:
         ui.print_error_message("There is no such option.")
