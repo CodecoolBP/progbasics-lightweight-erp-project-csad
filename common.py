@@ -138,12 +138,13 @@ def int_input_check(int_input):
     except (ValueError, TypeError):
         return False
     return True
-    
+
+
 def year_input_check(year_input):
     if len(year_input) != 4:
         return False
     return int_input_check(year_input)
-    
+
 
 def month_input_check(month_input):
     if int_input_check(month_input):
@@ -151,11 +152,13 @@ def month_input_check(month_input):
             return True
     return False
 
+
 def day_input_check(day_input):
     if int_input_check(day_input):
         if 0 < int(day_input) < 32:
             return True
     return False
+
 
 def str_input_check(str_input):
     if not int_input_check(str_input):
@@ -197,8 +200,13 @@ def types_check_for_update_function(table, types, list_labels, id_index, option)
                 table[id_index][int(option)] = month_input
                 break
             else:
+<<<<<<< HEAD
                 ui.print_error_message("Invalid entry.")
 
+=======
+                ui.print_error_message("Invalid entry.") 
+    
+>>>>>>> b5a2953a64c47b09f30e97dd13f1280ec06b3e99
     elif types[int(option) - 1] == "day":
         while True:
             day_input = ui.get_inputs([list_labels[int(option) - 1]], "")[0] 
@@ -230,7 +238,9 @@ def table_column_exist(table, id_index, list_labels, option, types):
     '''
 
     try:
-        table[id_index][int(option)] = ui.get_inputs([list_labels[int(option) - 1]], "")[0]
         types_check_for_update_function(table, types, list_labels, id_index, option)
     except IndexError:
         ui.print_error_message("There is no such option.")
+
+
+#def conc_date_for_sold_between_sales(year, month, day):

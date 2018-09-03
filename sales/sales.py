@@ -180,7 +180,6 @@ def get_lowest_price_item_id(table):
     lowest_price = int(table[0][2])
     item_id = table[0][0]
     for i in range(len(table)):
-        for j in range(len(table[i])):
             if int(table[i][2]) < lowest_price:
                 lowest_price = int(table[i][2])
                 item_id = table[i][0]
@@ -234,9 +233,7 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         to_date += str(0) + str(day_to)
 
     for i in range(len(table)):
-        sale_date_as_string = ""
-        sale_date_as_string += table[i][5]
-        
+        sale_date_as_string = table[i][5]
         if int(table[i][3]) >= 10:
             sale_date_as_string += table[i][3]
         elif int(table[i][3]) < 10:
