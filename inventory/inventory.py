@@ -115,6 +115,7 @@ def add(table):
     # your code
     list_labels = ['Please enter name:', 'Please enter manufacturer:', 'Please enter purchase year:', 'Please enter durability:']
     title = "Please enter name, manufacturer, purchase year and durability"
+    types = ['str_int', 'str_int', 'year', 'int']
     table = common.add_function_common(table, list_labels, title)
     return table
 
@@ -153,8 +154,9 @@ def update(table, id_):
     ui_options = ['Name', 'Manufacturer', 'Purchase year', 'Durability']
     ui_title = "Inventory item update"
     ui_exit_message = "Back to Inventory menu"
-    list_labels = ["Please enter a name: ", "Please enter the manufacturer: ", "Please enter purchase year: ", "Please enter durability: "]
-    table = common.update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels)
+    list_labels = ["Please enter a name: ", "Please enter the manufacturer:", "Please enter purchase year: ", "Please enter durability: "]
+    types = ['str_int', 'str_int', 'year', 'int']
+    table = common.update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels, types)
     return table
 
 # special functions:

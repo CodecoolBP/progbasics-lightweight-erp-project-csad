@@ -79,7 +79,7 @@ def remove_function_common(table, id_):
     return table
 
 
-def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels):
+def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels, types):
     """
     Update function for all moduls:
          - all of the other entries are inputs made by user using ui.get_inputs(list_labels, title)
@@ -112,29 +112,126 @@ def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, li
             inputs = ui.get_inputs(["Please enter a number: "], "")
             option = inputs[0]
             if option == "1":
-                table[id_index][1] = ui.get_inputs([list_labels[0]], "")[0]
+                types_check_for_update_function(table, types, list_labels, id_index, option)
             elif option == "2":
-                table[id_index][2] = ui.get_inputs([list_labels[1]], "")[0]
+                types_check_for_update_function(table, types, list_labels, id_index, option)
             elif option == "3":
-                table[id_index][3] = ui.get_inputs([list_labels[2]], "")[0]
+                types_check_for_update_function(table, types, list_labels, id_index, option)
             elif option == "4":
-                try:
-                    table[id_index][4] = ui.get_inputs([list_labels[3]], "")[0]
-                except IndexError:
-                    ui.print_error_message("There is no such option.")
+                table_column_exist(table, id_index, list_labels, option, types)
             elif option == "5":
-                try:
-                    table[id_index][5] = ui.get_inputs([list_labels[4]], "")[0]
-                except IndexError:
-                    ui.print_error_message("There is no such option.")
+                table_column_exist(table, id_index, list_labels, option, types)
             elif option == "6":
-                try:
-                    table[id_index][6] = ui.get_inputs([list_labels[5]], "")[0]
-                except IndexError:
-                    ui.print_error_message("There is no such option.")
+                table_column_exist(table, id_index, list_labels, option, types)
             elif option == "0":
                 break
             else:
                 ui.print_error_message("There is no such option.")
+            
     choose()
     return table
+
+    
+def int_input_check(int_input):
+    try:
+        int_input = int(int_input)
+    except (ValueError, TypeError):
+        return False
+    return True
+    
+def year_input_check(year_input):
+    if len(year_input) != 4:
+        return False
+    return int_input_check(year_input)
+    
+
+def month_input_check(month_input):
+    if int_input_check(month_input):
+        if 0 < int(month_input) < 13:
+            return True
+    return False
+
+def day_input_check(day_input):
+    if int_input_check(day_input):
+        if 0 < int(day_input) < 32:
+            return True
+    return False
+
+def str_input_check(str_input):
+    if not int_input_check(str_input):
+        return True
+
+
+def types_check_for_update_function(table, types, list_labels, id_index, option):
+    """
+    Checks the type of user inputs for update_function_common.
+    Args:
+        table (list): Data table to work on. 
+        types (list): types of list labels
+        list_labels (list): labels of inputs
+        id_index (int): index of the row of the table
+        option (str): str input for choose the data to update
+
+    """
+    
+    if types[int(option) - 1] == "int":
+        while True:
+            num_input = ui.get_inputs([list_labels[int(option) - 1]], "")[0] 
+            if int_input_check(num_input[0]):
+                table[id_index][int(option)] = num_input
+                break
+            ui.print_error_message("Invalid entry.")
+                                    
+    elif types[int(option) - 1] == "year":
+        while True:
+            year_input = ui.get_inputs([list_labels[int(option) - 1]], "")[0] 
+            if year_input_check(year_input):
+                table[id_index][int(option)] = year_input
+                break
+            ui.print_error_message("Invalid entry.")
+    
+    elif types[int(option) - 1] == "month":
+        while True:
+            month_input = ui.get_inputs([list_labels[int(option) - 1]], "")[0] 
+            if month_input_check(month_input):
+                table[id_index][int(option)] = month_input
+                break
+            else:
+                ui.print_error_message("Invalid entry.")
+            
+    
+    elif types[int(option) - 1] == "day":
+        while True:
+            day_input = ui.get_inputs([list_labels[int(option) - 1]], "")[0] 
+            if day_input_check(day_input):
+                table[id_index][int(option)] = day_input
+                break
+            ui.print_error_message("Invalid entry.")
+
+    elif types[int(option) - 1] == 'str':
+        while True:
+            str_input = ui.get_inputs([list_labels[int(option) - 1]], "")[0] 
+            if str_input_check(str_input):
+                table[id_index][int(option)] = str_input
+                break
+            ui.print_error_message("Invalid entry.")
+    else:
+        table[id_index][int(option)] = ui.get_inputs([list_labels[int(option) - 1]], "")[0]
+
+
+def table_column_exist(table, id_index, list_labels, option, types):
+    '''
+    Checks whether the column of the table exists for update_function_common.
+    Args:
+        table (list): Data table to work on. 
+        types (list): types of list labels
+        list_labels (list): labels of inputs
+        id_index (int): index of the row of the table
+        option (str): str input for choose the data to update
+    '''
+
+    try:
+        table[id_index][int(option)] = ui.get_inputs([list_labels[int(option) - 1]], "")[0]
+        types_check_for_update_function(table, types, list_labels, id_index, option)
+    except IndexError:
+        ui.print_error_message("There is no such option.")
