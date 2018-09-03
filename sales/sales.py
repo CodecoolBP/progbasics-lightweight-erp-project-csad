@@ -19,6 +19,17 @@ import data_manager
 import common
 
 
+def insert_customer_id_to_table():
+    sales_table = data_manager.get_table_from_file('sales/sales.csv')
+    customer_table = data_manager.get_table_from_file('crm/customers.csv')
+    for i in range(len(sales_table)):
+        sales_table[i].append(" ")
+        for j in range(len(customer_table)):
+            if sales_table[i][6] == customer_table[j][0]:
+                sales_table[i][7] = customer_table[j][1]
+                
+    return sales_table
+
 def start_module():
     """
     Starts this module and displays its menu.
@@ -34,8 +45,8 @@ def start_module():
         if table is False:
             pass
     except UnboundLocalError:
-        table = data_manager.get_table_from_file('sales/sales.csv')
-    
+        table = insert_customer_id_to_table()
+
     options = ["Show table",
                "Add",
                "Remove",
@@ -101,7 +112,7 @@ def show_table(table):
     """
 
     # your code
-    title_list = ["id", "title", "price", "month", "day", "year"]
+    title_list = ["id", "title", "price", "month", "day", "year", "customer_id", "name"]
     ui.print_table(table, title_list)
 
 def add(table):
@@ -206,6 +217,7 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 
 # functions supports data abalyser
 # --------------------------------
+    """
 
 
 def get_title_by_id(id):
