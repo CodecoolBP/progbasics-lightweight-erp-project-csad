@@ -90,8 +90,7 @@ def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, li
         ui_title (str): choose menu title
         ui_options (list): list of strings - options that will be shown in choose menu
         ui_exit_message (str): the last option with (0) (example: "Back to main menu")
-        list_labels (list): labels of inputs      
-        types (list): types of list_labels ('str', 'int', 'year', 'month', 'day', 'str_int')
+        list_labels (list): labels of inputs   
 
     Returns:
         list: table with updated record
