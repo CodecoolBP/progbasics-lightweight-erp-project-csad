@@ -197,6 +197,7 @@ def get_subscribed_emails(table):
 
 # functions supports data analyser
 # --------------------------------
+    """
 
 
 def get_name_by_id(id):
