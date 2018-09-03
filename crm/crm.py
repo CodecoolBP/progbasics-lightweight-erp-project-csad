@@ -58,9 +58,9 @@ def start_module():
                 id_ = ui.get_inputs(['Please enter ID'], "")
                 update(table, id_)
             elif option == "5":
-                
+                pass
             elif option == "6":
-                
+                pass
             elif option == "0":
                 answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
                 answer = answer_list[0].upper()
