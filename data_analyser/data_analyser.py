@@ -49,15 +49,15 @@ def start_module():
                 get_the_buyer_id_spent_most_and_the_money_spent()
             elif option == "5":
                 while not inputOK:
-                    num = ui.get_inputs(['Please enter the number of the customers to get: '], "")
-                    inputOK = common.int_input_check(num[0])
+                    num = ui.get_inputs(['Please enter the number of the customers to get: '], "")[0]
+                    inputOK = common.int_input_check(num)
                     if not inputOK:
                         ui.print_error_message("Must enter a number.")
                 get_the_most_frequent_buyers_names(num=1)
             elif option == "6":
                 while not inputOK:
-                    num = ui.get_inputs(['Please enter the number of the customers to get: '], "")
-                    inputOK = common.int_input_check(num[0])
+                    num = ui.get_inputs(['Please enter the number of the customers to get: '], "")[0]
+                    inputOK = common.int_input_check(num)
                     if not inputOK:
                         ui.print_error_message("Must enter a number.")
                 get_the_most_frequent_buyers_ids(num=1)
