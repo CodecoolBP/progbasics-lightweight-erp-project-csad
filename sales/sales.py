@@ -71,21 +71,21 @@ def start_module():
                 update(table, id_)
             elif option == "5":
                 result_id = get_lowest_price_item_id(table)
-                label_id = "lowest price item id"
+                label_id = "lowest price item id "
                 ui.print_result(result_id, label_id)
             elif option == "6":
                 date_from = ui.get_inputs(["month(from)", "day(from)", "year(from)"], "Please enter date(from): ")
-                month_from = str(date_from[0])
-                day_from = str(date_from[1])
-                year_from = str(date_from[2])
+                month_from = int(date_from[0])
+                day_from = int(date_from[1])
+                year_from = int(date_from[2])
                 date_to = ui.get_inputs(["month(to)", "day(to)", "year(to)"], "Please enter date(to): ")
-                month_to = str(date_to[0])
-                day_to = str(date_to[1])
-                year_to = str(date_to[2])
+                month_to = int(date_to[0])
+                day_to = int(date_to[1])
+                year_to = int(date_to[2])
                 result_sold_between = get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
-                label_sold = "items sold between"
-                ui.print_result(result_sold_between, label_sold)
-            elif option == "0":
+                label_sold = "list of the items sold between "
+                ui.print_result(" ", label_sold)
+                show_table(result_sold_between)
                 answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
                 answer = answer_list[0].upper()
                 if answer == "Y":
@@ -127,9 +127,21 @@ def add(table):
     """
 
     # your code
-    list_labels = ["Please enter title: ", "Please enter price: ", "Please enter month: ", "Please enter day: ", "Please enter year: "]
-    title = "Please enter title, price, month, day, year"
-    common.add_function_common(table, list_labels, title)
+    list_labels = ["Please enter title: ", "Please enter price: ", "Please enter month: ", "Please enter day: ", "Please enter year: ", "Please enter customer_id"]
+    title = "Please enter title, price, month, day, year, customer_id"
+    table = common.add_function_common(table, list_labels, title)
+    table[-1].append(" ")
+    customer_table = data_manager.get_table_from_file("crm/customers.csv")
+    find_id = False
+    while not find_id:
+        for j in range(len(customer_table)):
+            if table[-1][6] == customer_table[j][0]:
+                table[-1][7] = customer_table[j][1]
+                find_id = True
+        if not find_id:
+            ui.print_error_message("ID not found.") 
+            table[-1][6] = ui.get_inputs(["Please enter customer_id"], "Please enter customer_id")[0]
+
     return table
 
 
@@ -165,11 +177,23 @@ def update(table, id_):
 
     # your code
     ui_title = "Sales item update"
-    ui_options = ["Title", "Price", "Month", "Day", "Year"]
-    ui_exit_message = "Back to Inventory menu"
-    list_labels = ["Please enter title: ", "Please enter price:", "Please enter month: ", "Please enter day: ", "Please enter year: "]
-    types = ['str_int', 'int', 'month', 'day', 'year']
+    ui_options = ["Title", "Price", "Month", "Day", "Year", "Customer_id"]
+    ui_exit_message = "Back to Sales menu"
+    list_labels = ["Please enter title: ", "Please enter price:", "Please enter month: ", "Please enter day: ", "Please enter year: ", "Please enter customer_id"]
+    types = ['str_int', 'int', 'month', 'day', 'year', 'str_int']
     table = common.update_function_common(table, id_, ui_title, ui_options, ui_exit_message, list_labels, types)
+    customer_table = data_manager.get_table_from_file("crm/customers.csv")
+    id_index = 0
+    for i in range(len(table)):
+        if id_[0] == table[i][0]:
+            id_index = i
+   
+
+    for j in range(len(customer_table)):
+        if table[id_index][6] == customer_table[j][0]:
+            table[id_index][7] = customer_table[j][1]
+                
+        
     return table
 
 
@@ -218,7 +242,43 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
 # functions supports data abalyser
 # --------------------------------
     """
-
+    new_table = []
+    from_date = str(year_from) 
+    if month_from >= 10:
+        from_date += str(month_from)
+    elif month_from < 10:
+        from_date += str(0) + str(month_from)
+    if day_from >= 10:
+        from_date += str(day_from)
+    elif day_from < 10:
+        from_date += str(0) + str(day_from)
+    
+    to_date = str(year_to)
+    if month_to >= 10:
+        to_date += str(month_to)
+    elif month_to < 10:
+        to_date += str(0) + str(month_to)
+    if day_to >= 10:
+        to_date += str(day_to)
+    elif day_to < 10:
+        to_date += str(0) + str(day_to)
+    for i in range(len(table)):
+        sale_date_as_string = ""
+        sale_date_as_string += table[i][5]
+        
+        if int(table[i][3]) >= 10:
+            sale_date_as_string += table[i][3]
+        elif int(table[i][3]) < 10:
+            sale_date_as_string += str(0) + table[i][3]
+        if int(table[i][4]) >= 10:
+            sale_date_as_string += table[i][4]
+        elif int(table[i][4]) < 10:
+            sale_date_as_string += str(0) + table[i][4]
+        
+        if int(from_date) < int(sale_date_as_string) < int(to_date):
+            new_table.append(table[i])
+            sale_date_as_string = ""
+    return new_table
 
 def get_title_by_id(id):
 
