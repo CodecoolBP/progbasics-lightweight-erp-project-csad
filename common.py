@@ -200,13 +200,8 @@ def types_check_for_update_function(table, types, list_labels, id_index, option)
                 table[id_index][int(option)] = month_input
                 break
             else:
-<<<<<<< HEAD
-                ui.print_error_message("Invalid entry.")
-
-=======
                 ui.print_error_message("Invalid entry.") 
     
->>>>>>> b5a2953a64c47b09f30e97dd13f1280ec06b3e99
     elif types[int(option) - 1] == "day":
         while True:
             day_input = ui.get_inputs([list_labels[int(option) - 1]], "")[0] 
