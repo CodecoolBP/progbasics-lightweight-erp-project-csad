@@ -399,13 +399,13 @@ def get_the_sum_of_prices_from_table(table, item_ids):
     Returns:
         (number) the sum of the items' prices
     """
-    sales_table = insert_customer_id_to_table()
+    
     sum_price = 0
 
-    for i in range(len(sales_table)):
+    for i in range(len(table)):
         for j in range(len(item_ids)):
-            if item_ids[j] == sales_table[i][0]:
-                sum_price += int(sales_table[i][2])
+            if item_ids[j] == table[i][0]:
+                sum_price += int(table[i][2])
     
     return sum_price
     # your code
