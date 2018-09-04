@@ -70,13 +70,22 @@ def print_result(result, label):
             result.pop()
             result_type = 'list'
         except (ValueError, AttributeError):
-            result_type = 'dict'
+            if isinstance(result, tuple):
+                result_type = 'tuple'
+            else:
+                result_type = 'dict'
+
+    if isinstance(result, tuple):
+        result_type = 'tuple'
+
     if result_type == 'str':
         print("\nThe " + label + "is: " + result)
     elif result_type == 'list':
         print('\n'+label)
         for element in result:
             print('\t'+str(element))
+    elif result_type == 'tuple':
+        print("\nThe " + label + "is: " + str(result))
     else:
         print("\nThe " + label + "is: ")
         for key in result:
