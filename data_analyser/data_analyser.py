@@ -38,6 +38,7 @@ def start_module():
             ui.print_menu("Data analyser", options, "Back to main menu")
             inputs = ui.get_inputs(["Please enter a number: "], "")
             option = inputs[0]
+            inputOK = False
             if option == "1":
                 get_the_last_buyer_name()
             elif option == "2":
@@ -47,10 +48,18 @@ def start_module():
             elif option == "4":
                 get_the_buyer_id_spent_most_and_the_money_spent()
             elif option == "5":
-                num = ui.get_inputs(['Please enter the number of the customers to get: '], "")
+                while not inputOK:
+                    num = ui.get_inputs(['Please enter the number of the customers to get: '], "")[0]
+                    inputOK = common.int_input_check(num)
+                    if not inputOK:
+                        ui.print_error_message("Must enter a number.")
                 get_the_most_frequent_buyers_names(num=1)
             elif option == "6":
-                num = ui.get_inputs(['Please enter the number of the customers to get: '], "")
+                while not inputOK:
+                    num = ui.get_inputs(['Please enter the number of the customers to get: '], "")[0]
+                    inputOK = common.int_input_check(num)
+                    if not inputOK:
+                        ui.print_error_message("Must enter a number.")
                 get_the_most_frequent_buyers_ids(num=1)
             elif option == "0":
                 break
