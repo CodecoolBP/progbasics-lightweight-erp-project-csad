@@ -75,7 +75,7 @@ def remove_function_common(table, id_):
             del table[element]
             return table
     ui.print_error_message('\nID not found \n')
-    
+
     return table
 
 
@@ -90,7 +90,7 @@ def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, li
         ui_title (str): choose menu title
         ui_options (list): list of strings - options that will be shown in choose menu
         ui_exit_message (str): the last option with (0) (example: "Back to main menu")
-        list_labels (list): labels of inputs   
+        list_labels (list): labels of inputs
 
     Returns:
         list: table with updated record
@@ -178,7 +178,7 @@ def types_check_for_update_function(table, types, list_labels, id_index, option)
         option (str): str input for choose the data to update
 
     """
-    
+
     if types[int(option) - 1] == "int":
         while True:
             num_input = ui.get_inputs([list_labels[int(option) - 1]], "")[0] 
@@ -186,7 +186,7 @@ def types_check_for_update_function(table, types, list_labels, id_index, option)
                 table[id_index][int(option)] = num_input
                 break
             ui.print_error_message("Invalid entry.")
-                                    
+
     elif types[int(option) - 1] == "year":
         while True:
             year_input = ui.get_inputs([list_labels[int(option) - 1]], "")[0] 
@@ -194,7 +194,7 @@ def types_check_for_update_function(table, types, list_labels, id_index, option)
                 table[id_index][int(option)] = year_input
                 break
             ui.print_error_message("Invalid entry.")
-    
+
     elif types[int(option) - 1] == "month":
         while True:
             month_input = ui.get_inputs([list_labels[int(option) - 1]], "")[0] 
