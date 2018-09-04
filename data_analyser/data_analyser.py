@@ -25,8 +25,39 @@ def start_module():
     """
 
     # your code
+    options = ["Get the last buyer name",
+            "Get the last buyer id",
+            "Get the buyer name who spent most and show the money spent",
+            "Get the buyer id who spent most and show the money spent",
+            "Get the most frequent buyers names",
+            "Get the most frequent buyers ids"]
 
-    pass
+
+    def choose():
+        while True:
+            ui.print_menu("Data analyser", options, "Back to main menu")
+            inputs = ui.get_inputs(["Please enter a number: "], "")
+            option = inputs[0]
+            if option == "1":
+                get_the_last_buyer_name()
+            elif option == "2":
+                get_the_last_buyer_id()
+            elif option == "3":
+                get_the_buyer_name_spent_most_and_the_money_spent()
+            elif option == "4":
+                get_the_buyer_id_spent_most_and_the_money_spent()
+            elif option == "5":
+                num = ui.get_inputs(['Please enter the number of the customers to get: '], "")
+                get_the_most_frequent_buyers_names(num=1)
+            elif option == "6":
+                num = ui.get_inputs(['Please enter the number of the customers to get: '], "")
+                get_the_most_frequent_buyers_ids(num=1)
+            elif option == "0":
+                break
+            else:
+                ui.print_error_message("There is no such option.")
+                
+    choose()
 
 
 def get_the_last_buyer_name():

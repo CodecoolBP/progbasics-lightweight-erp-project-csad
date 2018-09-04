@@ -58,9 +58,11 @@ def start_module():
                 id_ = ui.get_inputs(['Please enter ID'], "")
                 update(table, id_)
             elif option == "5":
-                pass
+                result_get_longest_name_id = get_longest_name_id(table)
+                ui.print_result(result_get_longest_name_id, "longest name ID ")
             elif option == "6":
-                pass
+                result_get_subscribed_emails = get_subscribed_emails(table)
+                ui.print_result(result_get_subscribed_emails, "Subscribed customer(s):")
             elif option == "0":
                 answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
                 answer = answer_list[0].upper()
@@ -170,17 +172,22 @@ def get_longest_name_id(table):
 
     # your code
 
-    longest_name_length = 0
-    current_longest_list = [[]]
+    names = []
+    ids = []
+    longest_name_lengt = 0
+    longest_name_id = ""
+    last_name = ""
     for lines in table:
-        if len(lines[1]) > longest_name_length:
-            longest_name_length = len(lines[1])
-            current_longest_list[0].append(lines[0])
-            current_longest_list[0].append(lines[1])
-        if len(lines[1]) == longest_name_length:
-            current_longest_list[0].append(lines[0])
-            current_longest_list[0].append(lines[1])
-    print(current_longest_list)
+        if len(lines[1]) >= longest_name_lengt:
+            longest_name_lengt = len(lines[1])
+            ids.append(lines[0])
+            names.append(lines[1])
+    id_and_name = dict(zip(names, ids))
+    for key, value in id_and_name.items():
+        if key > last_name:
+            last_name = key
+            longest_name_id = value
+    return longest_name_id
 
 
 # the question: Which customers has subscribed to the newsletter?
@@ -192,17 +199,31 @@ def get_subscribed_emails(table):
         Args:
             table (list): data table to work on
 
-    pass
+    """
+
+    final_list = []
+    email = []
+    name = []
+    for lines in table:
+        if lines[3] == "1":
+            name.append(lines[1])
+            email.append(lines[2])
+    subscribed_customers = dict(zip(email, name))
+    for key, value in subscribed_customers.items():
+        entry = key + ";" + value
+        final_list.append(entry)
+    return final_list
 
 
 # functions supports data analyser
 # --------------------------------
-    """
+    
 
 
 def get_name_by_id(id):
 
     """
+    
     Reads the table with the help of the data_manager module.
     Returns the name (str) of the customer with the given id (str) on None om case of non-existing id.
 
