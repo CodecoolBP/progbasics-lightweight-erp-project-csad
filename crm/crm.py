@@ -59,9 +59,10 @@ def start_module():
                 update(table, id_)
             elif option == "5":
                 result_get_longest_name_id = get_longest_name_id(table)
-                ui.print_result(result_get_longest_name_id, "longest name ID: ")
+                ui.print_result(result_get_longest_name_id, "longest name ID ")
             elif option == "6":
-                pass
+                result_get_subscribed_emails = get_subscribed_emails(table)
+                ui.print_result(result_get_subscribed_emails, "Subscribed customer(s):")
             elif option == "0":
                 answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
                 answer = answer_list[0].upper()
@@ -198,12 +199,25 @@ def get_subscribed_emails(table):
         Args:
             table (list): data table to work on
 
-    pass
+    """
+
+    final_list = []
+    email = []
+    name = []
+    for lines in table:
+        if lines[3] == "1":
+            name.append(lines[1])
+            email.append(lines[2])
+    subscribed_customers = dict(zip(email, name))
+    for key, value in subscribed_customers.items():
+        entry = key + ";" + value
+        final_list.append(entry)
+    return final_list
 
 
 # functions supports data analyser
 # --------------------------------
-    """
+    
 
 
 def get_name_by_id(id):
