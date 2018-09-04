@@ -123,6 +123,8 @@ def update_function_common(table, id_, ui_title, ui_options, ui_exit_message, li
                 table_column_exist(table, id_index, list_labels, option, types)
             elif option == "6":
                 table_column_exist(table, id_index, list_labels, option, types)
+            elif option == "7":
+                table_column_exist(table, id_index, list_labels, option, types)    
             elif option == "0":
                 break
             else:
