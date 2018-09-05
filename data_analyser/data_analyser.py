@@ -40,9 +40,9 @@ def start_module():
             option = inputs[0]
             inputOK = False
             if option == "1":
-                get_the_last_buyer_name()
+                ui.print_result(get_the_last_buyer_name(), "last buyer's name ")
             elif option == "2":
-                get_the_last_buyer_id()
+                ui.print_result(get_the_last_buyer_id(), "last buyer's id ")
             elif option == "3":
                 result = get_the_buyer_name_spent_most_and_the_money_spent()
                 label = 'buyer name spent the most and the money spent '
@@ -82,8 +82,21 @@ def get_the_last_buyer_name():
     """
 
     # your code
-
-    pass
+    sales_table = sales.insert_customer_id_to_table()
+    name_and_date_list = []
+    for entry in sales_table:
+        name_and_date = entry[5]
+        if len(entry[3]) == 1:
+            name_and_date += '0'+entry[3]
+        else:
+            name_and_date += entry[3]
+        if len(entry[4]) == 1:
+            name_and_date += '0'+entry[4]
+        else:
+            name_and_date += entry[4]
+        name_and_date_list.append([name_and_date, entry[7]])
+    name_and_date_list.sort()
+    return name_and_date_list[-1][1]
 
 
 def get_the_last_buyer_id():
@@ -95,8 +108,10 @@ def get_the_last_buyer_id():
     """
 
     # your code
-
-    pass
+    sales_table = sales.insert_customer_id_to_table()
+    for entry in sales_table:
+        if get_the_last_buyer_name() == entry[7]:
+            return entry[6]
 
 
 def get_the_buyer_name_spent_most_and_the_money_spent():
