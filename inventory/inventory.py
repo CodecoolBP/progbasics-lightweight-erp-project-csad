@@ -116,7 +116,7 @@ def add(table):
     list_labels = ['Please enter name:', 'Please enter manufacturer:', 'Please enter purchase year:', 'Please enter durability:']
     title = "Please enter name, manufacturer, purchase year and durability"
     types = ['str_int', 'str_int', 'year', 'int']
-    table = common.add_function_common(table, list_labels, title)
+    table = common.add_function_common(table, list_labels, title, types)
     return table
 
 
