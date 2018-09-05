@@ -4,6 +4,7 @@ implement commonly used functions here
 
 import random
 import ui
+from sales import sales
 
 
 def generate_random(table):
@@ -241,3 +242,18 @@ def table_column_exist(table, id_index, list_labels, option, types):
 
 
 #def conc_date_for_sold_between_sales(year, month, day):
+
+
+def get_sortable_date_from_sales():
+    sales_table = sales.insert_customer_id_to_table()
+    for entry in sales_table:
+        date = entry[5]
+        if len(entry[3]) == 1:
+            date += '0'+entry[3]
+        else:
+            date += entry[3]
+        if len(entry[4]) == 1:
+            date += '0'+entry[4]
+        else:
+            date += entry[4]
+        yield date
