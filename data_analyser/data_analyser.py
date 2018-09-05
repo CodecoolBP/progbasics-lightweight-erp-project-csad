@@ -192,9 +192,13 @@ def get_the_most_frequent_buyers_names(num=1):
         sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
     customers = list(sales_per_customers.items())
     requested_list = []
-    for buyer in range(int(num)):
-        request = customers[buyer]
-        requested_list.append(request)
+    try:
+        int(num) <= len(name_list)
+        for buyer in range(int(num)):
+            request = customers[buyer]
+            requested_list.append(request)
+    except IndexError:
+        ui.print_error_message("There are less customers in the database.")
     return [requested_list]
 
 
@@ -217,7 +221,13 @@ def get_the_most_frequent_buyers_ids(num=1):
     customers = sales.get_num_of_sales_per_customer_ids()
     customers = list(customers.items())
     requested_list = []
-    for buyer in range(int(num)):
-        request = customers[buyer]
-        requested_list.append(request)
+    try:
+        int(num) <= len(requested_list)
+        for buyer in range(int(num)):
+            request = customers[buyer]
+            requested_list.append(request)
+    except IndexError:
+        ui.print_error_message("There are less customers in the database.")
     return [requested_list]
+    
+    
