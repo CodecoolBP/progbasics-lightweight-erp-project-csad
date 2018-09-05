@@ -171,6 +171,14 @@ def start_module():
                 result = get_all_customer_ids_from_table(table)
                 label = "get all customer ids "
                 ui.print_result(result, label)
+            elif option == "18":
+                result = get_all_sales_ids_for_customer_ids()
+                label = "get all sales ids for customer ids"
+                ui.print_result(result, label)
+            elif option == "19":
+                result = get_all_sales_ids_for_customer_ids_form_table(table)
+                label = "get all sales ids for customer ids from table"
+                ui.print_result(result, label)
             elif option == "20":
                 result_get_num_of_sales_per_customer_ids = get_num_of_sales_per_customer_ids()
                 ui.print_result(result_get_num_of_sales_per_customer_ids, "number of sales per customer ")
@@ -689,7 +697,24 @@ def get_all_sales_ids_for_customer_ids():
 
     # your code
 
-    pass
+    table = insert_customer_id_to_table()
+    customer_ids = get_all_customer_ids()
+    cust_list = list(customer_ids)
+    customer_sale = {}
+    cust_found = False
+    
+    for i in range(len(table)):
+        for j in range(len(cust_list)):
+            if cust_list[j] == table[i][6]:
+                if cust_list[j] not in customer_sale:
+                    customer_sale[cust_list[j]] = []
+                    customer_sale[cust_list[j]].append(table[i][0])
+                else:
+                    customer_sale[cust_list[j]].append(table[i][0])
+                
+    
+    return customer_sale
+
 
 #19
 def get_all_sales_ids_for_customer_ids_form_table(table):
@@ -707,7 +732,22 @@ def get_all_sales_ids_for_customer_ids_form_table(table):
 
     # your code
 
-    pass
+    customer_ids = get_all_customer_ids()
+    cust_list = list(customer_ids)
+    customer_sale = {}
+    cust_found = False
+    
+    for i in range(len(table)):
+        for j in range(len(cust_list)):
+            if cust_list[j] == table[i][6]:
+                if cust_list[j] not in customer_sale:
+                    customer_sale[cust_list[j]] = []
+                    customer_sale[cust_list[j]].append(table[i][0])
+                else:
+                    customer_sale[cust_list[j]].append(table[i][0])
+                
+    
+    return customer_sale
 
 #20
 def get_num_of_sales_per_customer_ids():
