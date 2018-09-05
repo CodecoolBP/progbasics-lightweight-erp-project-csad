@@ -75,6 +75,8 @@ def print_result(result, label):
         print("\nThe " + label + "is: ")
         for key in result:
             print('\t',key, ':', result[key])
+    elif isinstance(result, set):
+        print("\nThe " + label + "is: " + str(result))
         
 
 

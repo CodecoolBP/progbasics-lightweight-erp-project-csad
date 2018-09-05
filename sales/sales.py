@@ -109,6 +109,18 @@ def start_module():
                     break
                 else:
                     ui.print_error_message("Invalid answer.")
+            elif option == "7":
+                id_input= ui.get_inputs(['id'], "Please enter ID")
+                id_ = id_input[0]
+                result = get_title_by_id(id_)
+                label = "get title by id "
+                ui.print_result(result, label)
+            elif option == "8":
+                id_input= ui.get_inputs(['id'], "Please enter ID")
+                id_ = id_input[0]
+                result = get_title_by_id_from_table(table, id_)
+                label = "get title by id "
+                ui.print_result(result, label)
             elif option == "9":
                 ui.print_result(get_item_id_sold_last(), "last item's id ")
             elif option == "10":
@@ -145,6 +157,29 @@ def start_module():
                 label = "get the sum of prices from table "
                 result = get_the_sum_of_prices_from_table(table, item_ids)
                 ui.print_result(result, label)
+            elif option == "14":
+                id_ = ui.get_inputs(['sale_id'], "Please enter ID")
+                sale_id = id_[0]
+                result = get_customer_id_by_sale_id(sale_id)
+                label = "get customer id by sale id "
+                ui.print_result(result, label)
+            elif option == "15":
+                id_ = ui.get_inputs(['sale_id'], "Please enter ID")
+                sale_id = id_[0]
+                result = get_customer_id_by_sale_id_from_table(table, sale_id)
+                label = "get customer id by sale id from table "
+                ui.print_result(result, label)
+            elif option == "16":
+                result = get_all_customer_ids()
+                label = "get all customer ids "
+                ui.print_result(result, label)
+            elif option == "17":
+                result = get_all_customer_ids_from_table(table)
+                label = "get all customer ids "
+                ui.print_result(result, label)
+            elif option == "20":
+                result_get_num_of_sales_per_customer_ids = get_num_of_sales_per_customer_ids()
+                ui.print_result(result_get_num_of_sales_per_customer_ids, "number of sales per customer ")
             elif option == "21":
                 result_get_num_of_sales_per_customer_ids_from_table = get_num_of_sales_per_customer_ids_from_table(table)
                 ui.print_result(result_get_num_of_sales_per_customer_ids_from_table, "number of sales per customer ")
@@ -296,8 +331,36 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     Question: Which items are sold between two given dates? (from_date < sale_date < to_date)
 
     Args:
-        table (list): data table to work on
+        table (list): da
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    customer_ids = []
+    customer_id = ""
+    for lines in table:
+        if lines[6] == customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+        if lines[6] != customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+    sales_per_customers = {}
+    for item in customer_ids:
+        sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
+    return sales_per_customers
         month_from (int)
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    customer_ids = []
+    customer_id = ""
+    for lines in table:
+        if lines[6] == customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+        if lines[6] != customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+    sales_per_customers = {}
+    for item in customer_ids:
+        sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
+    return sales_per_customers
         day_from (int)
         year_from (int)
         month_to (int)
@@ -315,6 +378,20 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         from_date += str(month_from)
     elif month_from < 10:
         from_date += str(0) + str(month_from)
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    customer_ids = []
+    customer_id = ""
+    for lines in table:
+        if lines[6] == customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+        if lines[6] != customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+    sales_per_customers = {}
+    for item in customer_ids:
+        sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
+    return sales_per_customers
     if day_from >= 10:
         from_date += str(day_from)
     elif day_from < 10:
@@ -348,7 +425,7 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     return new_table
 
 #7
-def get_title_by_id(id):
+def get_title_by_id(id_):
 
     """
     Reads the table with the help of the data_manager module.
@@ -363,10 +440,20 @@ def get_title_by_id(id):
 
     # your code
 
-    pass
+    table = data_manager.get_table_from_file("sales/sales.csv")
+    
+    for i in range(len(table)):
+        if id_ == table[i][0]:
+            title = table [i][1]
+            title_found = True
+            return title
+    ui.print_error_message("There is no such id.")
+    return None
+    
+    
 
 #8
-def get_title_by_id_from_table(table, id):
+def get_title_by_id_from_table(table, id_):
 
     """
     Returns the title (str) of the item with the given id (str) on None om case of non-existing id.
@@ -380,8 +467,14 @@ def get_title_by_id_from_table(table, id):
     """
 
     # your code
-
-    pass
+    
+    for i in range(len(table)):
+        if id_ == table[i][0]:
+            title = table [i][1]
+            title_found = True
+            return title
+    ui.print_error_message("There is no such id.")
+    return None
 
 #9
 def get_item_id_sold_last():
@@ -409,9 +502,37 @@ def get_item_id_sold_last_from_table(table):
     Returns the _id_ of the item that was sold most recently.
 
     Args:
-        table (list of lists): the sales table
+        tabl
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    customer_ids = []
+    customer_id = ""
+    for lines in table:
+        if lines[6] == customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+        if lines[6] != customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+    sales_per_customers = {}
+    for item in customer_ids:
+        sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
+    return sales_per_customers
 
     Returns:
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    customer_ids = []
+    customer_id = ""
+    for lines in table:
+        if lines[6] == customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+        if lines[6] != customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+    sales_per_customers = {}
+    for item in customer_ids:
+        sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
+    return sales_per_customers
         (str) the _id_ of the item that was sold most recently.
     """
 
@@ -500,7 +621,14 @@ def get_customer_id_by_sale_id(sale_id):
 
     # your code
 
-    pass
+    table = insert_customer_id_to_table()
+    for i in range(len(table)):
+        if sale_id == table[i][0]:
+            cust_id = table[i][6]
+            return cust_id
+    ui.print_error_message("There is no such sale id.")
+    return None
+
 
 #15
 def get_customer_id_by_sale_id_from_table(table, sale_id):
@@ -516,7 +644,12 @@ def get_customer_id_by_sale_id_from_table(table, sale_id):
 
     # your code
 
-    pass
+    for i in range(len(table)):
+        if sale_id == table[i][0]:
+            cust_id = table[i][6]
+            return cust_id
+    ui.print_error_message("There is no such sale id.")
+    return None
 
 #16
 def get_all_customer_ids():
@@ -526,10 +659,15 @@ def get_all_customer_ids():
     Returns:
          set of customer_ids that are present in the table
     """
-
+    
     # your code
 
-    pass
+    table = insert_customer_id_to_table()
+    customers = []
+    for i in range(len(table)):
+        customers.append(table[i][6])
+    
+    return set(customers)
 
 #17
 def get_all_customer_ids_from_table(table):
@@ -543,7 +681,11 @@ def get_all_customer_ids_from_table(table):
 
     # your code
 
-    pass
+    customers = []
+    for i in range(len(table)):
+        customers.append(table[i][6])
+    
+    return set(customers)
 
 #18
 def get_all_sales_ids_for_customer_ids():
@@ -593,7 +735,22 @@ def get_num_of_sales_per_customer_ids():
 
     # your code
 
-    pass
+    
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    customer_ids = []
+    customer_id = ""
+    for lines in table:
+        if lines[6] == customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+        if lines[6] != customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+    sales_per_customers = {}
+    for item in customer_ids:
+        sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
+    return sales_per_customers
+    
 
 #21
 def get_num_of_sales_per_customer_ids_from_table(table):
