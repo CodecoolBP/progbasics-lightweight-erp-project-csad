@@ -52,7 +52,22 @@ def start_module():
                "Remove",
                "Update",
                "Get lowest price item ID",
-               "Get items sold"]
+               "Get items sold",
+               "Get title by id",
+               "Get title by id from table",
+               "Get item id sold last",
+               "Get item id sold last from table",
+               "Get item title sold last from table",
+               "Get the sum of prices",
+               "Get the sum of prices from table",
+               "Get customer id by sale id",
+               "Get customer id by sale id from table",
+               "Get all customer ids",
+               "Get all customer ids from table",
+               "Get all sales ids for customer ids",
+               "Get all sales ids for customer ids from table",
+               "Get num of sales per customer ids",
+               "Get num of sales per customer ids from table"]
     
     def choose():
         while True:
@@ -94,6 +109,27 @@ def start_module():
                     break
                 else:
                     ui.print_error_message("Invalid answer.")
+            elif option == "12":
+                item_ids = ui.get_inputs(['item_ids'], "Please enter ID")
+                label = "get the sum of prices "
+                result = get_the_sum_of_prices(item_ids)
+                ui.print_result(str(result), label)
+            elif option == "13":
+                label = "get the sum of prices from table "
+                item_ids = ui.get_inputs(['item_ids'], "Please enter ID")
+                result = get_the_sum_of_prices_from_table(table, item_ids)
+                ui.print_result(result, label)
+            elif option == "0":
+                answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
+                answer = answer_list[0].upper()
+                if answer == "Y":
+                    for i in range(len(table)):
+                        table[i][slice(-2)]      
+                    data_manager.write_table_to_file('sales/sales.csv', table)
+                elif answer == "N":
+                    break
+                else:
+                    ui.print_error_message("Invalid answer.")
             else:
                 ui.print_error_message("There is no such option.")
 
@@ -114,6 +150,7 @@ def show_table(table):
     # your code
     title_list = ["id", "title", "price", "month", "day", "year", "customer_id", "name"]
     ui.print_table(table, title_list)
+
 
 def add(table):
     """
@@ -280,6 +317,7 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
             sale_date_as_string = ""
     return new_table
 
+#7
 def get_title_by_id(id):
 
     """
@@ -297,7 +335,7 @@ def get_title_by_id(id):
 
     pass
 
-
+#8
 def get_title_by_id_from_table(table, id):
 
     """
@@ -315,7 +353,7 @@ def get_title_by_id_from_table(table, id):
 
     pass
 
-
+#9
 def get_item_id_sold_last():
     """
     Reads the table with the help of the data_manager module.
@@ -329,7 +367,7 @@ def get_item_id_sold_last():
 
     pass
 
-
+#10
 def get_item_id_sold_last_from_table(table):
     """
     Returns the _id_ of the item that was sold most recently.
@@ -345,7 +383,7 @@ def get_item_id_sold_last_from_table(table):
 
     pass
 
-
+#11
 def get_item_title_sold_last_from_table(table):
     """
     Returns the _title_ of the item that was sold most recently.
@@ -383,7 +421,7 @@ def get_the_sum_of_prices(item_ids):
             if item_ids[j] == sales_table[i][0]:
                 sum_price += int(sales_table[i][2])
     
-    return sum_price
+    return int(sum_price)
                  
         
 
@@ -411,7 +449,7 @@ def get_the_sum_of_prices_from_table(table, item_ids):
     # your code
 
 
-
+#14
 def get_customer_id_by_sale_id(sale_id):
     """
     Reads the sales table with the help of the data_manager module.
@@ -427,7 +465,7 @@ def get_customer_id_by_sale_id(sale_id):
 
     pass
 
-
+#15
 def get_customer_id_by_sale_id_from_table(table, sale_id):
     """
     Returns the customer_id that belongs to the given sale_id
@@ -443,7 +481,7 @@ def get_customer_id_by_sale_id_from_table(table, sale_id):
 
     pass
 
-
+#16
 def get_all_customer_ids():
     """
     Reads the sales table with the help of the data_manager module.
@@ -456,7 +494,7 @@ def get_all_customer_ids():
 
     pass
 
-
+#17
 def get_all_customer_ids_from_table(table):
     """
     Returns a set of customer_ids that are present in the table.
@@ -470,7 +508,7 @@ def get_all_customer_ids_from_table(table):
 
     pass
 
-
+#18
 def get_all_sales_ids_for_customer_ids():
     """
     Reads the customer-sales association table with the help of the data_manager module.
@@ -487,7 +525,7 @@ def get_all_sales_ids_for_customer_ids():
 
     pass
 
-
+#19
 def get_all_sales_ids_for_customer_ids_form_table(table):
     """
     Returns a dictionary of (customer_id, sale_ids) where:
@@ -505,7 +543,7 @@ def get_all_sales_ids_for_customer_ids_form_table(table):
 
     pass
 
-
+#20
 def get_num_of_sales_per_customer_ids():
     """
      Reads the customer-sales association table with the help of the data_manager module.
@@ -520,7 +558,7 @@ def get_num_of_sales_per_customer_ids():
 
     pass
 
-
+#21
 def get_num_of_sales_per_customer_ids_from_table(table):
     """
      Returns a dictionary of (customer_id, num_of_sales) where:
