@@ -563,7 +563,7 @@ def get_all_customer_ids():
     Returns:
          set of customer_ids that are present in the table
     """
-
+    
     # your code
 
     pass
