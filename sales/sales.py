@@ -104,7 +104,7 @@ def start_module():
                 answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
                 answer = answer_list[0].upper()
                 if answer == "Y":
-                    data_manager.write_table_to_file('store/games.csv', table)
+                    data_manager.write_table_to_file('sales/sales.csv', table)
                 elif answer == "N":
                     break
                 else:

@@ -57,7 +57,6 @@ def add_function_common(table, list_labels, title, types):
     list_to_add.extend(types)
     table.append(list_to_add)
     id_index = max(range(len(table)))
-    print(id_index)
     for i in range(len(types)):
         types_check_for_update_function(table, types, list_labels, id_index, i+1)
     return table

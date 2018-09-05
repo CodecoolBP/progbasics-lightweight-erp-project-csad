@@ -201,4 +201,3 @@ def get_the_most_frequent_buyers_ids(num=1):
         request = customers[buyer]
         requested_list.append(request)
     return [requested_list]
-    
