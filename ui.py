@@ -60,27 +60,22 @@ def print_result(result, label):
         None: This function doesn't return anything it only prints to console.
     """
     # your code
-    try:
-        result = result+' '
-        result = result[:-1]
-        result_type = 'str'
-    except TypeError:
-        try:
-            result.append('')
-            result.pop()
-            result_type = 'list'
-        except (ValueError, AttributeError):
-            result_type = 'dict'
-    if result_type == 'str':
+    
+    if isinstance(result, str):
         print("\nThe " + label + "is: " + result)
-    elif result_type == 'list':
+    elif isinstance(result, int):
+        print("\nThe " + label + "is: " + result)
+    elif isinstance(result, list):
         print('\n'+label)
         for element in result:
             print('\t'+str(element))
-    else:
+    elif isinstance(result, tuple):
+        print("\nThe " + label + "is: " + str(result))
+    elif isinstance(result, dict):
         print("\nThe " + label + "is: ")
         for key in result:
             print('\t',key, ':', result[key])
+        
 
 
 def print_menu(title, list_options, exit_message):
