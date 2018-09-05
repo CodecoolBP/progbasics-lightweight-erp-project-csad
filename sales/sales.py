@@ -119,6 +119,9 @@ def start_module():
                 item_ids = ui.get_inputs(['item_ids'], "Please enter ID")
                 result = get_the_sum_of_prices_from_table(table, item_ids)
                 ui.print_result(result, label)
+            elif option == "21":
+                result_get_num_of_sales_per_customer_ids_from_table = get_num_of_sales_per_customer_ids_from_table(table)
+                ui.print_result(result_get_num_of_sales_per_customer_ids_from_table, "number of sales per customer ")
             elif option == "0":
                 answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
                 answer = answer_list[0].upper()
