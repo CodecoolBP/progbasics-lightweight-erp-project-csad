@@ -109,6 +109,12 @@ def start_module():
                     break
                 else:
                     ui.print_error_message("Invalid answer.")
+            elif option == "7":
+                id_input= ui.get_inputs(['id'], "Please enter ID")
+                id_ = id_input[0]
+                result = get_title_by_id(id_)
+                label = "get title by id "
+                ui.print_result(result, label)
             elif option == "12":
                 add_input = True
                 item_ids = []
@@ -345,7 +351,7 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     return new_table
 
 #7
-def get_title_by_id(id):
+def get_title_by_id(id_):
 
     """
     Reads the table with the help of the data_manager module.
@@ -360,7 +366,16 @@ def get_title_by_id(id):
 
     # your code
 
-    pass
+    table = data_manager.get_table_from_file("sales/sales.csv")
+    
+    for i in range(len(table)):
+        if id_ == table[i][0]:
+            title = table [i][1]
+            title_found = True
+            return title
+    ui.print_error_message("There is no such id.")
+    
+    
 
 #8
 def get_title_by_id_from_table(table, id):
