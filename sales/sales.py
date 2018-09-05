@@ -115,6 +115,12 @@ def start_module():
                 result = get_title_by_id(id_)
                 label = "get title by id "
                 ui.print_result(result, label)
+            elif option == "8":
+                id_input= ui.get_inputs(['id'], "Please enter ID")
+                id_ = id_input[0]
+                result = get_title_by_id_from_table(table, id_)
+                label = "get title by id "
+                ui.print_result(result, label)
             elif option == "12":
                 add_input = True
                 item_ids = []
@@ -144,6 +150,18 @@ def start_module():
                         add_input = False
                 label = "get the sum of prices from table "
                 result = get_the_sum_of_prices_from_table(table, item_ids)
+                ui.print_result(result, label)
+            elif option == "14":
+                id_ = ui.get_inputs(['sale_id'], "Please enter ID")
+                sale_id = id_[0]
+                result = get_customer_id_by_sale_id(sale_id)
+                label = "get customer id by sale id "
+                ui.print_result(result, label)
+            elif option == "15":
+                id_ = ui.get_inputs(['sale_id'], "Please enter ID")
+                sale_id = id_[0]
+                result = get_customer_id_by_sale_id_from_table(table, sale_id)
+                label = "get customer id by sale id from table "
                 ui.print_result(result, label)
             elif option == "21":
                 result_get_num_of_sales_per_customer_ids_from_table = get_num_of_sales_per_customer_ids_from_table(table)
@@ -375,7 +393,7 @@ def get_title_by_id(id_):
     
 
 #8
-def get_title_by_id_from_table(table, id):
+def get_title_by_id_from_table(table, id_):
 
     """
     Returns the title (str) of the item with the given id (str) on None om case of non-existing id.
@@ -389,8 +407,13 @@ def get_title_by_id_from_table(table, id):
     """
 
     # your code
-
-    pass
+    
+    for i in range(len(table)):
+        if id_ == table[i][0]:
+            title = table [i][1]
+            title_found = True
+            return title
+    ui.print_error_message("There is no such id.")
 
 #9
 def get_item_id_sold_last():
@@ -502,7 +525,14 @@ def get_customer_id_by_sale_id(sale_id):
 
     # your code
 
-    pass
+    table = insert_customer_id_to_table()
+    for i in range(len(table)):
+        if sale_id == table[i][0]:
+            cust_id = table[i][6]
+            return cust_id
+    ui.print_error_message("There is no such sale id.")
+    return None
+
 
 #15
 def get_customer_id_by_sale_id_from_table(table, sale_id):
@@ -518,7 +548,12 @@ def get_customer_id_by_sale_id_from_table(table, sale_id):
 
     # your code
 
-    pass
+    for i in range(len(table)):
+        if sale_id == table[i][0]:
+            cust_id = table[i][6]
+            return cust_id
+    ui.print_error_message("There is no such sale id.")
+    return None
 
 #16
 def get_all_customer_ids():
