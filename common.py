@@ -29,7 +29,7 @@ def generate_random(table):
     return generated
 
 
-def add_function_common(table, list_labels, title):
+def add_function_common(table, list_labels, title, types):
     """
     Add function for all moduls:
          - adds id with generate_random(table) function
@@ -54,9 +54,12 @@ def add_function_common(table, list_labels, title):
             else:
                 generated_id_OK = True
     list_to_add.append(generated_id)
-    inputs = ui.get_inputs(list_labels, title)
-    list_to_add.extend(inputs)
+    list_to_add.extend(types)
     table.append(list_to_add)
+    id_index = max(range(len(table)))
+    print(id_index)
+    for i in range(len(types)):
+        types_check_for_update_function(table, types, list_labels, id_index, i+1)
     return table
 
 
