@@ -22,7 +22,7 @@ def get_table_from_file(file_name, title_list):
     for i in range(len(table_as_list_of_lists)):
         if table_as_list_of_lists[i][0] not in table_as_dict:
             table_as_dict[table_as_list_of_lists[i][0]] = {}
-            for j in range(1, len(title_list)-1):
+            for j in range(1, len(title_list)):
                 if title_list[j] not in table_as_dict[table_as_list_of_lists[i][0]]:
                     table_as_dict[table_as_list_of_lists[i][0]][title_list[j]] = table_as_list_of_lists[i][j]
                     
@@ -42,10 +42,15 @@ def write_table_to_file(file_name, table):
          None
     """
     with open(file_name, "w") as file:
-        for record in table:
-            row = ';'.join(record)
-            file.write(row + "\n")
+        for key in table:
+            for inner_key in table[key]:
+                row_without_id = ';'.join(table[key][inner_key])
+                row = table[key] + ";" + row_without_id
+                file.write(row + "\n")
 
 
-title_list = ["id", "title", "price", "month", "day", "year", "customer_id", "name"]
+
+
+
+title_list = ["id", "title", "price", "month", "day", "year", "customer_id"]
 print(get_table_from_file("sales.csv", title_list))
