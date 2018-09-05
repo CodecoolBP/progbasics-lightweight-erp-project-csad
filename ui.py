@@ -25,26 +25,27 @@ def print_table(table, title_list):
     
  
     # your goes code
+   
     max_length_list = []
-
-    for x in range(len(title_list)):
+    for x in range(1, len(title_list)):
         max_length = 0
-        for i in range(len(table)):
-            for j in range(len(table[i])):
-                if len(table[i][x]) > max_length:
-                    max_length = len(table[i][x])
+        for key in table:
+            if len(table[key][title_list[x]]) > max_length:
+                max_length = len(table[key][title_list[x]])
 
-        if max_length < len(title_list[x]):
-            max_length = len(title_list[x])
+            if max_length < len(title_list[x]):
+                max_length = len(title_list[x])
         
         max_length_list.append(max_length)
+    max_length_list.insert(0, len(key))
+    
     
     print("\n")
     print("|", "|".join(item.center(max_length_list[i] + 2, " ") for i, item in enumerate(title_list)), "|")
     print((sum(max_length_list) + 2 * len(max_length_list) + len(max_length_list) + 2) * "-")
     print((sum(max_length_list) + 2 * len(max_length_list) + len(max_length_list) + 2) * "-")
-    for i in range(len(table)):
-        print("|", "|".join(item.center(max_length_list[j] + 2, " ") for j, item in enumerate(table[i])), "|")
+    for key in table:
+        print("|", key.center(max_length_list[0] + 2, " "), "|", "|".join(value.center(max_length_list[j+1] + 2, " ") for j, value in enumerate(table[key].values())), "|")
         print((sum(max_length_list) + 2 * len(max_length_list) + len(max_length_list) + 2) * "-")
 
 

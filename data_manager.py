@@ -48,9 +48,3 @@ def write_table_to_file(file_name, table):
                 row = table[key] + ";" + row_without_id
                 file.write(row + "\n")
 
-
-
-
-
-title_list = ["id", "title", "price", "month", "day", "year", "customer_id"]
-print(get_table_from_file("sales.csv", title_list))
