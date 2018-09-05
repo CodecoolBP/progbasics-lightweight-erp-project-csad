@@ -64,7 +64,8 @@ def start_module():
                     inputOK = common.int_input_check(num)
                     if not inputOK:
                         ui.print_error_message("Must enter a number.")
-                get_the_most_frequent_buyers_ids(num=1)
+                result_get_the_most_frequent_buyers_ids = get_the_most_frequent_buyers_ids(num)
+                ui.print_result(result_get_the_most_frequent_buyers_ids, "Number of sales per customer ID:")
             elif option == "0":
                 break
             else:
@@ -136,8 +137,8 @@ def get_the_buyer_name_spent_most_and_the_money_spent():
 
 def get_the_buyer_id_spent_most_and_the_money_spent():
     """
-    Returns the customer's _id_ who spent more in sum and the money (s)he spent.
-    Returns a tuple of customer id and the sum the customer spent.
+    Returns the customer's _id_ whoget_num_of_sales_per_customer_ids_from_table(table)pent more in sum and the money (s)he spent.
+    Returns a tuple of customer id get_num_of_sales_per_customer_ids_from_table(table)d the sum the customer spent.
     eg.: (aH34Jq#&, 42)
 
    Returns:
@@ -192,6 +193,12 @@ def get_the_most_frequent_buyers_ids(num=1):
         Ordered list of tuples of customer ids and num of sales
     """
 
-    # your code
 
-    pass
+    customers = sales.get_num_of_sales_per_customer_ids()
+    customers = list(customers.items())
+    requested_list = []
+    for buyer in range(int(num)):
+        request = customers[buyer]
+        requested_list.append(request)
+    return [requested_list]
+    
