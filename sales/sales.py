@@ -737,7 +737,7 @@ def get_num_of_sales_per_customer_ids():
     for item in customer_ids:
         sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
     return sales_per_customers
-    
+
 
 #21
 def get_num_of_sales_per_customer_ids_from_table(table):
