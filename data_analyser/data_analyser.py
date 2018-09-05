@@ -57,7 +57,8 @@ def start_module():
                     inputOK = common.int_input_check(num)
                     if not inputOK:
                         ui.print_error_message("Must enter a number.")
-                get_the_most_frequent_buyers_names(num=1)
+                result_get_the_most_frequent_buyers_names = get_the_most_frequent_buyers_names(num)
+                ui.print_result(result_get_the_most_frequent_buyers_names, "Number of sales per customers name:")
             elif option == "6":
                 while not inputOK:
                     num = ui.get_inputs(['Please enter the number of the customers to get: '], "")[0]
@@ -176,7 +177,26 @@ def get_the_most_frequent_buyers_names(num=1):
 
     # your code
 
-    pass
+    table = sales.insert_customer_id_to_table()
+    name_list = []
+    name = ""
+    for lines in table:
+        if lines[7] == name:
+            name = lines[7]
+            name_list.append(lines[7])
+        if lines[7] != name:
+            name = lines[7]
+            name_list.append(lines[7])
+    sales_per_customers = {}
+    for item in name_list:
+        sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
+    customers = list(sales_per_customers.items())
+    requested_list = []
+    for buyer in range(int(num)):
+        request = customers[buyer]
+        requested_list.append(request)
+    return [requested_list]
+
 
 
 def get_the_most_frequent_buyers_ids(num=1):
@@ -201,4 +221,3 @@ def get_the_most_frequent_buyers_ids(num=1):
         request = customers[buyer]
         requested_list.append(request)
     return [requested_list]
-    
