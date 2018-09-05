@@ -110,13 +110,33 @@ def start_module():
                 else:
                     ui.print_error_message("Invalid answer.")
             elif option == "12":
-                item_ids = ui.get_inputs(['item_ids'], "Please enter ID")
+                add_input = True
+                item_ids = []
+                while add_input:
+                    item_id = ui.get_inputs(['item_ids'], "Please enter ID")
+                    item_ids.append(item_id[0])
+                    answer_list = ui.get_inputs(["Do you want to add another item? (Y/N)"], "")
+                    answer = answer_list[0].upper()
+                    if answer == "Y":
+                        add_input = True
+                    elif answer == "N":
+                        add_input = False
                 label = "get the sum of prices "
                 result = get_the_sum_of_prices(item_ids)
                 ui.print_result(str(result), label)
             elif option == "13":
+                add_input = True
+                item_ids = []
+                while add_input:
+                    item_id = ui.get_inputs(['item_ids'], "Please enter ID")
+                    item_ids.append(item_id[0])
+                    answer_list = ui.get_inputs(["Do you want to add another item? (Y/N)"], "")
+                    answer = answer_list[0].upper()
+                    if answer == "Y":
+                        add_input = True
+                    elif answer == "N":
+                        add_input = False
                 label = "get the sum of prices from table "
-                item_ids = ui.get_inputs(['item_ids'], "Please enter ID")
                 result = get_the_sum_of_prices_from_table(table, item_ids)
                 ui.print_result(result, label)
             elif option == "0":
