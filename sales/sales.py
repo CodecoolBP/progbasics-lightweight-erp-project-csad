@@ -100,6 +100,7 @@ def start_module():
 
     choose()
 
+
 def show_table(table):
     """
     Display a table
@@ -518,4 +519,18 @@ def get_num_of_sales_per_customer_ids_from_table(table):
 
     # your code
 
-    pass
+  
+    customer_ids = []
+    customer_id = ""
+    for lines in table:
+        if lines[6] == customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+        if lines[6] != customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+    sales_per_customers = {}
+    for item in customer_ids:
+        sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
+    return sales_per_customers
+    
