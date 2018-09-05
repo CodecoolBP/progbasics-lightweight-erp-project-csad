@@ -163,6 +163,14 @@ def start_module():
                 result = get_customer_id_by_sale_id_from_table(table, sale_id)
                 label = "get customer id by sale id from table "
                 ui.print_result(result, label)
+            elif option == "16":
+                result = get_all_customer_ids()
+                label = "get all customer ids "
+                ui.print_result(result, label)
+            elif option == "17":
+                result = get_all_customer_ids_from_table(table)
+                label = "get all customer ids "
+                ui.print_result(result, label)
             elif option == "20":
                 result_get_num_of_sales_per_customer_ids = get_num_of_sales_per_customer_ids()
                 ui.print_result(result_get_num_of_sales_per_customer_ids, "number of sales per customer ")
@@ -434,6 +442,7 @@ def get_title_by_id(id_):
             title_found = True
             return title
     ui.print_error_message("There is no such id.")
+    return None
     
     
 
@@ -456,23 +465,10 @@ def get_title_by_id_from_table(table, id_):
     for i in range(len(table)):
         if id_ == table[i][0]:
             title = table [i][1]
-    table = data_manager.get_table_from_file('sales/sales.csv')
-    customer_ids = []
-    customer_id = ""
-    for lines in table:
-        if lines[6] == customer_id:
-            customer_id = lines[6]
-            customer_ids.append(lines[6])
-        if lines[6] != customer_id:
-            customer_id = lines[6]
-            customer_ids.append(lines[6])
-    sales_per_customers = {}
-    for item in customer_ids:
-        sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
-    return sales_per_customers
             title_found = True
             return title
     ui.print_error_message("There is no such id.")
+    return None
 
 #9
 def get_item_id_sold_last():
@@ -653,7 +649,12 @@ def get_all_customer_ids():
     
     # your code
 
-    pass
+    table = insert_customer_id_to_table()
+    customers = []
+    for i in range(len(table)):
+        customers.append(table[i][6])
+    
+    return set(customers)
 
 #17
 def get_all_customer_ids_from_table(table):
@@ -667,7 +668,11 @@ def get_all_customer_ids_from_table(table):
 
     # your code
 
-    pass
+    customers = []
+    for i in range(len(table)):
+        customers.append(table[i][6])
+    
+    return set(customers)
 
 #18
 def get_all_sales_ids_for_customer_ids():
