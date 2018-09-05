@@ -44,9 +44,13 @@ def start_module():
             elif option == "2":
                 get_the_last_buyer_id()
             elif option == "3":
-                get_the_buyer_name_spent_most_and_the_money_spent()
+                result = get_the_buyer_name_spent_most_and_the_money_spent()
+                label = 'buyer name spent the most and the money spent '
+                ui.print_result(result, label)
             elif option == "4":
-                get_the_buyer_id_spent_most_and_the_money_spent()
+                result = get_the_buyer_id_spent_most_and_the_money_spent()
+                label = 'buyer id spent most and the money spent'
+                ui.print_result(result, label)
             elif option == "5":
                 while not inputOK:
                     num = ui.get_inputs(['Please enter the number of the customers to get: '], "")[0]
@@ -106,8 +110,22 @@ def get_the_buyer_name_spent_most_and_the_money_spent():
     """
 
     # your code
+    sales_table = sales.insert_customer_id_to_table()
 
-    pass
+    name_sum = {}
+
+    for i in range(len(sales_table)):
+        if sales_table[i][7] not in name_sum:
+            name_sum[sales_table[i][7]] = int(sales_table[i][2])
+        else: 
+            name_sum[sales_table[i][7]] += int(sales_table[i][2])
+    
+    price_name_tuple = max(zip(name_sum.values(), name_sum.keys()))
+   
+    name_price = price_name_tuple[::-1]
+    return name_price
+    
+        
 
 
 def get_the_buyer_id_spent_most_and_the_money_spent():
@@ -121,8 +139,18 @@ def get_the_buyer_id_spent_most_and_the_money_spent():
     """
 
     # your code
+    name_and_sum = get_the_buyer_name_spent_most_and_the_money_spent()
+    sales_table = sales.insert_customer_id_to_table()
+    id_ = []
+    
+    for i in range(len(sales_table)):
+        if name_and_sum[0] == sales_table[i][7]:
+            id_.append(sales_table[i][6])
+            break
+    id_sum = [id_[0], name_and_sum[1]]            
+    
+    return tuple(id_sum)
 
-    pass
 
 
 def get_the_most_frequent_buyers_names(num=1):

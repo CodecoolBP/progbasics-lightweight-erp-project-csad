@@ -361,7 +361,7 @@ def get_item_title_sold_last_from_table(table):
 
     pass
 
-
+#12
 def get_the_sum_of_prices(item_ids):
     """
     Reads the table of sales with the help of the data_manager module.
@@ -375,10 +375,19 @@ def get_the_sum_of_prices(item_ids):
     """
 
     # your code
+    sales_table = data_manager.get_table_from_file('sales/sales.csv')
+    sum_price = 0
 
-    pass
+    for i in range(len(sales_table)):
+        for j in range(len(item_ids)):
+            if item_ids[j] == sales_table[i][0]:
+                sum_price += int(sales_table[i][2])
+    
+    return sum_price
+                 
+        
 
-
+#13
 def get_the_sum_of_prices_from_table(table, item_ids):
     """
     Returns the sum of the prices of the items in the item_ids.
@@ -390,10 +399,17 @@ def get_the_sum_of_prices_from_table(table, item_ids):
     Returns:
         (number) the sum of the items' prices
     """
+    
+    sum_price = 0
 
+    for i in range(len(table)):
+        for j in range(len(item_ids)):
+            if item_ids[j] == table[i][0]:
+                sum_price += int(table[i][2])
+    
+    return sum_price
     # your code
 
-    pass
 
 
 def get_customer_id_by_sale_id(sale_id):
