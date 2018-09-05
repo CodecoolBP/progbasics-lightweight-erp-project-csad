@@ -81,23 +81,14 @@ def get_the_last_buyer_name():
         Customer name of the last buyer
     """
 
-    # your code
     sales_table = sales.insert_customer_id_to_table()
-    name_and_date_list = []
+    names = []
+    date_list = list(common.get_sortable_date_from_sales())
     for entry in sales_table:
-        name_and_date = entry[5]
-        if len(entry[3]) == 1:
-            name_and_date += '0'+entry[3]
-        else:
-            name_and_date += entry[3]
-        if len(entry[4]) == 1:
-            name_and_date += '0'+entry[4]
-        else:
-            name_and_date += entry[4]
-        name_and_date_list.append([name_and_date, entry[7]])
+        names.append(entry[7])
+    name_and_date_list = list(zip(date_list, names))
     name_and_date_list.sort()
     return name_and_date_list[-1][1]
-
 
 def get_the_last_buyer_id():
     """

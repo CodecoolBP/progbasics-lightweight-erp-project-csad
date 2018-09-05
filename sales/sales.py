@@ -121,6 +121,12 @@ def start_module():
                 result = get_title_by_id_from_table(table, id_)
                 label = "get title by id "
                 ui.print_result(result, label)
+            elif option == "9":
+                ui.print_result(get_item_id_sold_last(), "last item's id ")
+            elif option == "10":
+                ui.print_result(get_item_id_sold_last_from_table(table), "last item's id from table ")
+            elif option == "11":
+                ui.print_result(get_item_title_sold_last_from_table(table), "last item's title from table ")
             elif option == "12":
                 add_input = True
                 item_ids = []
@@ -489,8 +495,14 @@ def get_item_id_sold_last():
     """
 
     # your code
-
-    pass
+    sales_table = insert_customer_id_to_table()
+    item_id = []
+    date_list = list(common.get_sortable_date_from_sales())
+    for entry in sales_table:
+        item_id.append(entry[0])
+    id_and_date_list = list(zip(date_list, item_id))
+    id_and_date_list.sort()
+    return id_and_date_list[-1][1]
 
 #10
 def get_item_id_sold_last_from_table(table):
@@ -534,7 +546,7 @@ def get_item_id_sold_last_from_table(table):
 
     # your code
 
-    pass
+    return get_item_id_sold_last()
 
 #11
 def get_item_title_sold_last_from_table(table):
@@ -549,8 +561,9 @@ def get_item_title_sold_last_from_table(table):
     """
 
     # your code
-
-    pass
+    for entry in table:
+        if get_item_id_sold_last() == entry[0]:
+            return entry[1]
 
 #12
 def get_the_sum_of_prices(item_ids):
