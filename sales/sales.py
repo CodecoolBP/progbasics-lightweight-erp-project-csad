@@ -139,6 +139,9 @@ def start_module():
                 label = "get the sum of prices from table "
                 result = get_the_sum_of_prices_from_table(table, item_ids)
                 ui.print_result(result, label)
+            elif option == "20":
+                result_get_num_of_sales_per_customer_ids = get_num_of_sales_per_customer_ids()
+                ui.print_result(result_get_num_of_sales_per_customer_ids, "number of sales per customer ")
             elif option == "21":
                 result_get_num_of_sales_per_customer_ids_from_table = get_num_of_sales_per_customer_ids_from_table(table)
                 ui.print_result(result_get_num_of_sales_per_customer_ids_from_table, "number of sales per customer ")
@@ -580,7 +583,21 @@ def get_num_of_sales_per_customer_ids():
 
     # your code
 
-    pass
+    table = data_manager.get_table_from_file('sales/sales.csv')
+    customer_ids = []
+    customer_id = ""
+    for lines in table:
+        if lines[6] == customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+        if lines[6] != customer_id:
+            customer_id = lines[6]
+            customer_ids.append(lines[6])
+    sales_per_customers = {}
+    for item in customer_ids:
+        sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
+    return sales_per_customers
+
 
 #21
 def get_num_of_sales_per_customer_ids_from_table(table):
