@@ -1,8 +1,7 @@
 """ User Interface (UI) module """
 from data_manager import *
 
-
-def print_table(table, title_list):
+def print_table_as_dict(table, title_list):
     """
     Prints table with data.
 
@@ -46,6 +45,52 @@ def print_table(table, title_list):
     print((sum(max_length_list) + 2 * len(max_length_list) + len(max_length_list) + 2) * "-")
     for key in table:
         print("|", key.center(max_length_list[0] + 2, " "), "|", "|".join(value.center(max_length_list[j+1] + 2, " ") for j, value in enumerate(table[key].values())), "|")
+        print((sum(max_length_list) + 2 * len(max_length_list) + len(max_length_list) + 2) * "-")
+
+
+def print_table(table, title_list):
+    """
+    Prints table with data.
+
+    Example:
+        /-----------------------------------\
+        |   id   |      title     |  type   |
+        |--------|----------------|---------|
+        |   0    | Counter strike |    fps  |
+        |--------|----------------|---------|
+        |   1    |       fo       |    fps  |
+        \-----------------------------------/
+
+    Args:
+        table (list): list of lists - table to display
+        title_list (list): list containing table headers
+
+    Returns:
+        None: This function doesn't return anything it only prints to console.
+    """
+    
+ 
+    # your goes code
+    max_length_list = []
+
+    for x in range(len(title_list)):
+        max_length = 0
+        for i in range(len(table)):
+            for j in range(len(table[i])):
+                if len(table[i][x]) > max_length:
+                    max_length = len(table[i][x])
+
+        if max_length < len(title_list[x]):
+            max_length = len(title_list[x])
+        
+        max_length_list.append(max_length)
+    
+    print("\n")
+    print("|", "|".join(item.center(max_length_list[i] + 2, " ") for i, item in enumerate(title_list)), "|")
+    print((sum(max_length_list) + 2 * len(max_length_list) + len(max_length_list) + 2) * "-")
+    print((sum(max_length_list) + 2 * len(max_length_list) + len(max_length_list) + 2) * "-")
+    for i in range(len(table)):
+        print("|", "|".join(item.center(max_length_list[j] + 2, " ") for j, item in enumerate(table[i])), "|")
         print((sum(max_length_list) + 2 * len(max_length_list) + len(max_length_list) + 2) * "-")
 
 

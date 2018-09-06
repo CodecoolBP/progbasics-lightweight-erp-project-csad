@@ -18,19 +18,28 @@ import data_manager
 # common module
 import common
 
-
-def insert_customer_id_to_table():
-    sales_table = data_manager.get_table_from_file('sales/sales.csv', ["id", "title", "price", "month", "day", "year", "customer_id"])
-    customer_table = data_manager.get_table_from_file('crm/customers.csv', ['id', 'name', 'email', 'subscribed'])
+def insert_customer_id_to_table_as_dict():
+    sales_table = data_manager.get_table_as_dict_from_file('sales/sales.csv', ["id", "title", "price", "month", "day", "year", "customer_id"])
+    customer_table = data_manager.get_table_as_dict_from_file('crm/customers.csv', ['id', 'name', 'email', 'subscribed'])
 
     for key in sales_table:
         sales_table[key]["name"] = " "
         for c_key in customer_table:
             if sales_table[key]["customer_id"] == c_key:
                 sales_table[key]["name"] = customer_table[c_key]['name']
-
-                
+    
     return sales_table
+
+'''def insert_customer_id_to_table():
+    sales_table = data_manager.get_table_from_file('sales/sales.csv')
+    customer_table = data_manager.get_table_from_file('crm/customers.csv')
+    for i in range(len(sales_table)):
+        sales_table[i].append(" ")
+        for j in range(len(customer_table)):
+            if sales_table[i][6] == customer_table[j][0]:
+                sales_table[i][7] = customer_table[j][1]
+                
+    return sales_table'''
 
 def start_module():
     """
@@ -47,7 +56,7 @@ def start_module():
         if table is False:
             pass
     except UnboundLocalError:
-        table = insert_customer_id_to_table()
+        table = insert_customer_id_to_table_as_dict()
 
     options = ["Show table",
                "Add",
@@ -106,7 +115,7 @@ def start_module():
                 answer_list = ui.get_inputs(["Do you want to save the changes? (Y/N)"], "")
                 answer = answer_list[0].upper()
                 if answer == "Y":
-                    data_manager.write_table_to_file('store/games.csv', table)
+                    data_manager.write_table_to_file('sales/sales.csv', table)
                 elif answer == "N":
                     break
                 else:
@@ -224,7 +233,7 @@ def show_table(table):
 
     # your code
     title_list = ["id", "title", "price", "month", "day", "year", "customer_id", "name"]
-    ui.print_table(table, title_list)
+    ui.print_table_as_dict(table, title_list)
 
 
 def add(table):
@@ -726,7 +735,7 @@ def get_num_of_sales_per_customer_ids():
     for item in customer_ids:
         sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
     return sales_per_customers
-    
+
 
 #21
 def get_num_of_sales_per_customer_ids_from_table(table):
@@ -757,4 +766,3 @@ def get_num_of_sales_per_customer_ids_from_table(table):
         sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
     return sales_per_customers
     
-#push test
