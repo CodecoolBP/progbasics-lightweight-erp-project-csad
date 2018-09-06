@@ -30,7 +30,8 @@ def start_module():
             "Get the buyer name who spent most and show the money spent",
             "Get the buyer id who spent most and show the money spent",
             "Get the most frequent buyers names",
-            "Get the most frequent buyers ids"]
+            "Get the most frequent buyers ids",
+            "Get the customers who did not buy anything"]
 
 
     def choose():
@@ -67,6 +68,8 @@ def start_module():
                         ui.print_error_message("Must enter a number.")
                 result_get_the_most_frequent_buyers_ids = get_the_most_frequent_buyers_ids(num)
                 ui.print_result(result_get_the_most_frequent_buyers_ids, "Number of sales per customer ID:")
+            elif option == "7":
+                ui.print_result(customers_who_did_not_buy_anything(), "list of customers who did not buy anything ")
             elif option == "0":
                 break
             else:
@@ -202,7 +205,6 @@ def get_the_most_frequent_buyers_names(num=1):
     return [requested_list]
 
 
-
 def get_the_most_frequent_buyers_ids(num=1):
     """
     Returns 'num' number of buyers (more precisely: the customer ids of them) who bought more frequent.
@@ -229,3 +231,17 @@ def get_the_most_frequent_buyers_ids(num=1):
     except IndexError:
         ui.print_error_message("There are less customers in the database.")
     return [requested_list]
+
+
+def customers_who_did_not_buy_anything():
+    sales_table = sales.insert_customer_id_to_table()
+    customers_who_did_buy_anything = []
+    for entry in sales_table:
+        if entry[7] not in customers_who_did_buy_anything:
+            customers_who_did_buy_anything.append(entry[7])
+    customers_who_did_not_buy_anything = []
+    customers = list(crm.get_names_for_data_analyser())
+    for customer in customers:
+        if customer not in customers_who_did_buy_anything:
+            customers_who_did_not_buy_anything.append(customer)
+    return customers_who_did_not_buy_anything
