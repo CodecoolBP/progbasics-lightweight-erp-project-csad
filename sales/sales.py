@@ -239,7 +239,8 @@ def add(table):
     # your code
     list_labels = ["Please enter title: ", "Please enter price: ", "Please enter month: ", "Please enter day: ", "Please enter year: ", "Please enter customer_id"]
     title = "Please enter title, price, month, day, year, customer_id"
-    table = common.add_function_common(table, list_labels, title)
+    types = ['str_int', 'int', 'month', 'day', 'year', 'str_int']
+    table = common.add_function_common(table, list_labels, title, types)
     table[-1].append(" ")
     customer_table = data_manager.get_table_from_file("crm/customers.csv")
     find_id = False
