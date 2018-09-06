@@ -111,7 +111,8 @@ def add(table):
 
     list_labels = ['Please enter name: ', 'Please enter email: ', 'Please enter subscribed (1/0): ']
     title = "Please enter name, email and subscribed"
-    table = common.add_function_common(table, list_labels, title)
+    types = ""
+    table = common.add_function_common(table, list_labels, title, types)
     return table
 
 
