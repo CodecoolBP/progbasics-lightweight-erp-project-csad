@@ -114,7 +114,8 @@ def add(table):
 
     list_labels = ['Please enter month: ', 'Please enter day: ', 'Please enter year: ', 'Please enter type: ', 'Please enter amount: ']
     title = "Please enter month, day, year, type and amount"
-    table = common.add_function_common(table, list_labels, title)
+    types = ['month', 'day', 'year', 'inout', 'int']
+    table = common.add_function_common(table, list_labels, title, types)
     return table
 
 

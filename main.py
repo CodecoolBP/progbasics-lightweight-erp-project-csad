@@ -43,6 +43,7 @@ def choose():
         raise KeyError("There is no such option.")
 
 
+
 def handle_menu():
     options = ["Store manager",
                "Human resources manager",

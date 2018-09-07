@@ -169,6 +169,16 @@ def str_input_check(str_input):
     if not int_input_check(str_input):
         return True
 
+def inout_input_check(inout_input):
+    if inout_input == "in" or inout_input == "out":
+        return True
+    return False
+    
+def subscribed_input_check(subscribed_input):
+    if subscribed_input == "0" or subscribed_input == "1":
+        return True
+    return False
+
 
 def types_check_for_update_function(table, types, list_labels, id_index, option):
     """
@@ -222,6 +232,23 @@ def types_check_for_update_function(table, types, list_labels, id_index, option)
                 table[id_index][int(option)] = str_input
                 break
             ui.print_error_message("Invalid entry.")
+
+    elif types[int(option) - 1] == 'inout':
+        while True:
+            inout_input = ui.get_inputs([list_labels[int(option) - 1]], "")[0].lower()
+            if inout_input_check(inout_input):
+                table[id_index][int(option)] = inout_input
+                break
+            ui.print_error_message("Invalid entry.")
+
+    elif types[int(option) - 1] == 'subscribed':
+        while True:
+            subscribed_input = ui.get_inputs([list_labels[int(option) - 1]], "")[0].lower()
+            if subscribed_input_check(subscribed_input):
+                table[id_index][int(option)] = subscribed_input
+                break
+            ui.print_error_message("Invalid entry.")    
+
     else:
         table[id_index][int(option)] = ui.get_inputs([list_labels[int(option) - 1]], "")[0]
 

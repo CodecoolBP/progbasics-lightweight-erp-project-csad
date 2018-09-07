@@ -111,7 +111,8 @@ def add(table):
 
     list_labels = ['Please enter name: ', 'Please enter email: ', 'Please enter subscribed (1/0): ']
     title = "Please enter name, email and subscribed"
-    table = common.add_function_common(table, list_labels, title)
+    types = ['str', 'str_int', 'subscribed']
+    table = common.add_function_common(table, list_labels, title, types)
     return table
 
 
@@ -255,3 +256,9 @@ def get_name_by_id_from_table(table, id):
     # your code
 
     pass
+
+
+def get_names_for_data_analyser():
+    table = data_manager.get_table_from_file('crm/customers.csv')
+    for entry in table:
+        yield entry[1]
