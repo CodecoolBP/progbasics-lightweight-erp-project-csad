@@ -46,11 +46,11 @@ def start_module():
                 ui.print_result(get_the_last_buyer_id(), "last buyer's id ")
             elif option == "3":
                 result = get_the_buyer_name_spent_most_and_the_money_spent()
-                label = 'buyer name spent the most and the money spent '
+                label = 'buyer name who spent the most and the money spent '
                 ui.print_result(result, label)
             elif option == "4":
                 result = get_the_buyer_id_spent_most_and_the_money_spent()
-                label = 'buyer id spent most and the money spent'
+                label = 'buyer id who spent most and the money spent '
                 ui.print_result(result, label)
             elif option == "5":
                 while not inputOK:
