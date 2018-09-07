@@ -89,14 +89,54 @@ def start_module():
                 label_id = "lowest price item id "
                 ui.print_result(result_id, label_id)
             elif option == "6":
-                date_from = ui.get_inputs(["month(from)", "day(from)", "year(from)"], "Please enter date(from): ")
-                month_from = int(date_from[0])
-                day_from = int(date_from[1])
-                year_from = int(date_from[2])
-                date_to = ui.get_inputs(["month(to)", "day(to)", "year(to)"], "Please enter date(to): ")
-                month_to = int(date_to[0])
-                day_to = int(date_to[1])
-                year_to = int(date_to[2])
+                while True:
+                    month = ui.get_inputs(["month(from)"], "Please enter date(from): ")
+                    if common.month_input_check(month[0]):
+                        month_from = int(month[0])
+                        break
+                    else:
+                        ui.print_error_message("Invalid entry.")
+                
+                while True:
+                    day = ui.get_inputs(["day(from)"], "Please enter date(from): ")
+                    if common.day_input_check(day[0]):
+                        day_from = int(day[0])
+                        break
+                    else:
+                        ui.print_error_message("Invalid entry.")
+                
+                while True:
+                    year = ui.get_inputs(["year(from)"], "Please enter date(from): ")
+                    if common.year_input_check(year[0]):
+                        year_from = int(year[0])
+                        break
+                    else:
+                        ui.print_error_message("Invalid entry.")
+                
+
+
+                while True:
+                    month = ui.get_inputs(["month(to)"], "Please enter date(to): ")
+                    if common.month_input_check(month[0]):       
+                        month_to = int(month[0])
+                    else:
+                        ui.print_error_message("Invalid entry.")
+
+                while True:
+                    day = ui.get_inputs(["day(to)"], "Please enter date(to): ")
+                    if common.day_input_check(day[0]):       
+                        day_to = int(day[0])
+                    else:
+                        ui.print_error_message("Invalid entry.")
+
+                while True:
+                    year = ui.get_inputs(["year(to)"], "Please enter date(to): ")
+                    if common.year_input_check(year[0]):       
+                        year_to = int(year[0])
+                    else:
+                        ui.print_error_message("Invalid entry.")
+
+                              
                 result_sold_between = get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
                 label_sold = "list of the items sold between "
                 ui.print_result(" ", label_sold)
@@ -354,20 +394,6 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
         from_date += str(month_from)
     elif month_from < 10:
         from_date += str(0) + str(month_from)
-    table = data_manager.get_table_from_file('sales/sales.csv')
-    customer_ids = []
-    customer_id = ""
-    for lines in table:
-        if lines[6] == customer_id:
-            customer_id = lines[6]
-            customer_ids.append(lines[6])
-        if lines[6] != customer_id:
-            customer_id = lines[6]
-            customer_ids.append(lines[6])
-    sales_per_customers = {}
-    for item in customer_ids:
-        sales_per_customers[item] = sales_per_customers.get(item, 0) + 1
-    return sales_per_customers
     if day_from >= 10:
         from_date += str(day_from)
     elif day_from < 10:
